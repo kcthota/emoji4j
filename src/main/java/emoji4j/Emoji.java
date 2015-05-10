@@ -1,11 +1,20 @@
 package emoji4j;
 
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ * Emoji
+ * @author Krishna Chaitanya Thota
+ *
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Emoji {
 
 	private String emoji;
 
-	private String shortCode;
+	private Set<String> aliases;
 
 	private String hexHtml;
 
@@ -17,18 +26,17 @@ public class Emoji {
 
 	public void setEmoji(String emoji) {
 		int htmlcode = Character.codePointAt(emoji, 0);
-		setDecimalHtml("&#x" + htmlcode + ";");
+		setDecimalHtml("&#" + htmlcode + ";");
 		setHexHtml("&#x" + Integer.toHexString(htmlcode) + ";");
 		this.emoji = emoji;
 	}
 
-	public String getShortCode() {
-		return shortCode;
+	public Set<String> getAliases() {
+		return aliases;
 	}
 
-	public void setShortCode(String shortCode) {
-
-		this.shortCode = shortCode;
+	public void setAliases(Set<String> aliases) {
+		this.aliases = aliases;
 	}
 
 	public String getHexHtml() {
@@ -47,4 +55,5 @@ public class Emoji {
 		this.decimalHtml = decimalHtml;
 	}
 
+	
 }

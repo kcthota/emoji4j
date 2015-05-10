@@ -1,51 +1,71 @@
 package emoji4j;
 
-import static com.kcthota.JSONQuery.expressions.Expr.eq;
-import static com.kcthota.JSONQuery.expressions.Expr.or;
+import static ch.lambdaj.Lambda.having;
+import static ch.lambdaj.Lambda.on;
+import static ch.lambdaj.Lambda.selectFirst;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.hamcrest.Matchers;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.kcthota.JSONQuery.Query;
 
 public class EmojiManager {
-	static ArrayNode emojiData;
+	static List<Emoji> emojiData;
 
 	static {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			InputStream stream = EmojiManager.class.getResourceAsStream("/emoji.json");
-			List<Emoji> emojiList = mapper.readValue(stream, TypeFactory.defaultInstance().constructCollectionType(List.class,  
-					   Emoji.class));
-			EmojiManager.emojiData = (ArrayNode) mapper.valueToTree(emojiList);
+			emojiData = mapper.readValue(stream, TypeFactory.defaultInstance().constructCollectionType(List.class, Emoji.class));
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
-	public static ArrayNode data() {
+	/**
+	 * Returns the complete emoji data
+	 * @return
+	 */
+	public static List<Emoji> data() {
 		return emojiData;
 	}
 
-	public static boolean isEmoji(String code) {
-		return getEmoji(code) == null ? false : true;
+	/**
+	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html entity
+	 * @param code
+	 * @return Emoji
+	 */
+	public static Emoji getEmoji(String code) {
+		
+		Pattern pattern = Pattern.compile(":(\\w+):");
+		Matcher m = pattern.matcher(code);
+		
+		if(m.find()) {
+			code = m.group(1);
+		}
+		
+		Emoji emoji = selectFirst(
+				data(),
+				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
+						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
+						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
+						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem((code)))));
+		
+		return emoji;
 	}
 
-	public static Emoji getEmoji(String code) {
-		ArrayNode filtered = Query.q(emojiData).filter(or(eq("emoji", code), eq("shortCode", code), eq("hexHtml", code), eq("decimalHtml", code)));
-		if (filtered.size() > 0) {
-			ObjectMapper mapper=new ObjectMapper();
-			try {
-				return mapper.treeToValue(filtered.get(0), Emoji.class);
-			} catch (JsonProcessingException e) {
-				return null;
-			}
-		}
-		return null;
+	/**
+	 * Checks if an Emoji exists for the unicode, short code, decimal or hexadecimal html entity
+	 * @param code
+	 * @return
+	 */
+	public static boolean isEmoji(String code) {
+		return getEmoji(code) == null ? false : true;
 	}
 
 }
