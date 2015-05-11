@@ -5,7 +5,27 @@
 	<artifactId>emoji4j</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>Emoji4j</name>
-	<description>Java library to convert short codes to emojis or html entities</description>
+	<description>Java library to convert short codes, html entities to emojis and vice-versa</description>
+	<inceptionYear>2015</inceptionYear>
+	<developers>
+		<developer>
+			<id>kcthota</id>
+			<name>Krishna Chaitanya Thota</name>
+			<email>kcthota at gmail dot com</email>
+			<url>https://github.com/kcthota</url>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://github.com/kcthota/emoji4j.git</connection>
+		<developerConnection>scm:git:git@github.com:kcthota/emoji4j.git</developerConnection>
+		<url>https://github.com/kcthota/emoji4j</url>
+	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jackson.version>2.5.2</jackson.version>
