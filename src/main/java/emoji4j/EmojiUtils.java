@@ -12,39 +12,42 @@ import org.hamcrest.Matchers;
 public class EmojiUtils {
 
 	/**
-	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html entity
+	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
+	 * entity
+	 * 
 	 * @param code
 	 * @return Emoji
 	 */
 	public static Emoji getEmoji(String code) {
-		
+
 		Pattern pattern = Pattern.compile(":(\\w+):");
 		Matcher m = pattern.matcher(code);
-		
-		if(m.find()) {
+
+		if (m.find()) {
 			code = m.group(1);
 		}
-		
+
 		Emoji emoji = selectFirst(
 				EmojiManager.data(),
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem((code)))));
-		
+
 		return emoji;
 	}
-	
 
 	/**
-	 * Checks if an Emoji exists for the unicode, short code, decimal or hexadecimal html entity
+	 * Checks if an Emoji exists for the unicode, short code, decimal or
+	 * hexadecimal html entity
+	 * 
 	 * @param code
 	 * @return
 	 */
 	public static boolean isEmoji(String code) {
 		return getEmoji(code) == null ? false : true;
 	}
-	
+
 	/**
 	 * Converts emoji short codes or html entities in string with emojis
 	 * 
@@ -52,7 +55,7 @@ public class EmojiUtils {
 	 * @return
 	 */
 	public static String emojify(String text) {
-		
+
 		// regex to identify html entitities and emoji short codes
 		String regex = ":\\w+:|&#\\w+;";
 		Pattern pattern = Pattern.compile(regex);
@@ -69,18 +72,43 @@ public class EmojiUtils {
 		matcher.appendTail(sb);
 		return sb.toString();
 	}
-	
+
 	/**
-	 * Converts unicode characters in text to corresponding decimal html entities
+	 * Counts valid emoji short codes and html tokens in the passed string
+	 * @param text
+	 * @return
+	 */
+	public static int countEmojiTokens(String text) {
+		// regex to identify html entitities and emoji short codes
+		String regex = ":\\w+:|&#\\w+;";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(text);
+		
+		int counter = 0;
+		while (matcher.find()) {
+			String emojiCode = matcher.group();
+			if (isEmoji(emojiCode)) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	/**
+	 * Converts unicode characters in text to corresponding decimal html
+	 * entities
+	 * 
 	 * @param text
 	 * @return
 	 */
 	public static String htmlify(String text) {
 		return htmlifyHelper(text, false);
 	}
-	
+
 	/**
-	 * Converts unicode characters in text to corresponding hexadecimal html entities
+	 * Converts unicode characters in text to corresponding hexadecimal html
+	 * entities
+	 * 
 	 * @param text
 	 * @return
 	 */
@@ -90,6 +118,7 @@ public class EmojiUtils {
 
 	/**
 	 * Helper to convert characters to html entities in a string
+	 * 
 	 * @param text
 	 * @param isHex
 	 * @return
