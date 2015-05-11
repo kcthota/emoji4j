@@ -4,7 +4,7 @@ Java library to convert short codes, html entities to emojis and vice-versa.
 Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji] (https://github.com/github/gemoji).
 
 # Usage
-<!--
+
 ```
 <dependency>
 	<groupId>com.kcthota</groupId>
@@ -12,7 +12,6 @@ Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoj
 	<version>1.0</version>
 </dependency>
 ```
--->
 
 # Examples:
 
