@@ -50,6 +50,23 @@ EmojiUtils.getEmoji("&#128045;").getEmoji(); //also returns 🐭
 
 ```
 
+## The Emoji Object
+
+Conversion from unicode, short code, hexadecimal and decimal html entities is pretty easy.
+
+```
+Emoji emoji = EmojiUtils.getEmoji("🐭");
+
+emoji.getEmoji(); //returns 🐭
+
+emoji.getDecimalHtml(); //returns &#128045;
+
+emoji.getHexHtml(); //return &#x1f42d;
+
+emoji.getAliases(); //returns a collection of aliases. ["mouse"]
+
+```
+
 ## isEmoji
 
 Verifies if the passed string is an emoji character
