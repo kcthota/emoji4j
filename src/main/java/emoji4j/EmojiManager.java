@@ -6,6 +6,11 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+/**
+ * Loads emojis from resource bundle
+ * @author Krishna Chaitanya Thota
+ *
+ */
 public class EmojiManager {
 	static List<Emoji> emojiData;
 

@@ -8,7 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.hamcrest.Matchers;
-
+/**
+ * Utils to deal with emojis
+ * @author Krishna Chaitanya Thota
+ *
+ */
 public class EmojiUtils {
 
 	/**
