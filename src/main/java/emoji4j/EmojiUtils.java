@@ -36,7 +36,8 @@ public class EmojiUtils {
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem((code)))));
+						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
+						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
 		return emoji;
 	}

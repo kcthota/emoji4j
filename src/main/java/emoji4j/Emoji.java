@@ -19,6 +19,8 @@ public class Emoji {
 	private String hexHtml;
 
 	private String decimalHtml;
+	
+	private Set<String> emoticons;
 
 	public String getEmoji() {
 		return emoji;
@@ -54,6 +56,16 @@ public class Emoji {
 	public void setDecimalHtml(String decimalHtml) {
 		this.decimalHtml = decimalHtml;
 	}
+
+	public Set<String> getEmoticons() {
+		return emoticons;
+	}
+
+	public void setEmoticons(Set<String> emoticons) {
+		this.emoticons = emoticons;
+	}
+	
+	
 
 	
 }

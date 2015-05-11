@@ -9,7 +9,7 @@ emoji4j
 
 Java library to convert short codes, html entities to emojis and vice-versa.
 
-Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji] (https://github.com/github/gemoji).
+Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji] (https://github.com/github/gemoji) and ASCII emoticons data from [wooorm/emoticon] (https://github.com/wooorm/emoticon).
 
 # Usage
 
