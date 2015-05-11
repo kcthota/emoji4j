@@ -36,8 +36,7 @@ public class EmojiUtils {
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
-						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
+						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code))));
 
 		return emoji;
 	}
@@ -78,16 +77,36 @@ public class EmojiUtils {
 		return sb.toString();
 	}
 
-	/**
-	 * Counts valid emoji short codes and html tokens in the passed string
-	 * @param text
-	 * @return
-	 */
+	@Deprecated
 	public static int countEmojiTokens(String text) {
 		// regex to identify html entitities and emoji short codes
 		String regex = ":\\w+:|&#\\w+;";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(text);
+		
+		int counter = 0;
+		while (matcher.find()) {
+			String emojiCode = matcher.group();
+			if (isEmoji(emojiCode)) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	/**
+	 * Counts valid emojis passed string
+	 * @param text
+	 * @return
+	 */
+	public static int countEmojis(String text) {
+		
+		String htmlifiedText = htmlify(text);
+
+		// regex to identify html entitities in htmlified text
+		String regex = "&#\\w+;";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(htmlifiedText);
 		
 		int counter = 0;
 		while (matcher.find()) {

@@ -1,6 +1,6 @@
 package emoji4j;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,13 +14,11 @@ public class Emoji {
 
 	private String emoji;
 
-	private Set<String> aliases;
+	private List<String> aliases;
 
 	private String hexHtml;
 
 	private String decimalHtml;
-	
-	private Set<String> emoticons;
 
 	public String getEmoji() {
 		return emoji;
@@ -33,11 +31,11 @@ public class Emoji {
 		this.emoji = emoji;
 	}
 
-	public Set<String> getAliases() {
+	public List<String> getAliases() {
 		return aliases;
 	}
 
-	public void setAliases(Set<String> aliases) {
+	public void setAliases(List<String> aliases) {
 		this.aliases = aliases;
 	}
 
@@ -56,16 +54,5 @@ public class Emoji {
 	public void setDecimalHtml(String decimalHtml) {
 		this.decimalHtml = decimalHtml;
 	}
-
-	public Set<String> getEmoticons() {
-		return emoticons;
-	}
-
-	public void setEmoticons(Set<String> emoticons) {
-		this.emoticons = emoticons;
-	}
-	
-	
-
 	
 }

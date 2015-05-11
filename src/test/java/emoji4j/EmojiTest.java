@@ -100,10 +100,17 @@ public class EmojiTest {
 				"A 🐱, 🐶, &nbsp; and a 🐭 became friends. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCountEmojiTokens() {
-		String text = "A &#128049;, &#x1f436;, :coyote: and a :mouse: became friends. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
-		assertThat(EmojiUtils.countEmojiTokens(text)).isEqualTo(8);
+		String text = "A &#128049;, &#x1f436;,&nbsp;:coyote: and a :mouse: became friends. For :dog:'s birthday party, they all had 🍔s, :fries:s, :cookie:s and :cake:.";
+		assertThat(EmojiUtils.countEmojiTokens(text)).isEqualTo(7);
+	}
+	
+	@Test
+	public void testCountEmojis() {
+		String text = "A &#128049;, &#x1f436;,&nbsp;:coyote: and a :mouse: became friends. For :dog:'s birthday party, they all had 🍔s, :fries:s, :cookie:s and :cake:.";
+		assertThat(EmojiUtils.countEmojis(text)).isEqualTo(8);
 	}
 
 	@Test
