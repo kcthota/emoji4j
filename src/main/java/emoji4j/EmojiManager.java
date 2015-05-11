@@ -58,6 +58,7 @@ public class EmojiManager {
 		
 		return emoji;
 	}
+	
 
 	/**
 	 * Checks if an Emoji exists for the unicode, short code, decimal or hexadecimal html entity
