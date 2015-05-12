@@ -48,6 +48,10 @@ EmojiUtils.getEmoji("&#x1f42d;").getEmoji(); //returns 🐭
 
 EmojiUtils.getEmoji("&#128045;").getEmoji(); //also returns 🐭
 
+Coming up in 2.0:
+
+EmojiUtils.getEmoji(":)").getEmoji(); //returns 😃
+
 ```
 
 ## The Emoji Object
