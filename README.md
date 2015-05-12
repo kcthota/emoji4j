@@ -156,6 +156,16 @@ EmojiUtils.countEmojis(text); //returns 8
 ## countEmojiTokens (@Deprecated)
 countEmojiTokens method would be deprecated in 2.0 and will be removed in subsequent releases. This method only counts tokens in a string and not unicode emojis. Users should migrate to using countEmojis method.
 
+## Get Emoji by Emoticons
+
+Get emoji by emoticons
+
+```
+Emoji emoji = EmojiUtils.getEmoji(":)"); //returns 😃
+		
+emoji = EmojiUtils.getEmoji(";]"); //returns 😉
+
+```
 
 ## License:
 

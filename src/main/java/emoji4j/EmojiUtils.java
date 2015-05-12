@@ -29,6 +29,7 @@ public class EmojiUtils {
 		Pattern pattern = Pattern.compile(":(\\w+):");
 		Matcher m = pattern.matcher(code);
 
+		// test for shortcode with colons
 		if (m.find()) {
 			code = m.group(1);
 		}
