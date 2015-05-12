@@ -65,7 +65,8 @@ public class EmojiUtils {
 	public static String emojify(String text) {
 
 		// regex to identify html entitities and emoji short codes
-		String regex = ":\\w+:|&#\\w+;";
+		String regex = EmojiManager.getEmoticonRegex()+"|:\\w+:|&#\\w+;";
+		
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();

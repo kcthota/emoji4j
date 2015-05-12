@@ -62,6 +62,9 @@ public class Emoji {
 	}
 
 	public void setEmoticons(List<String> emoticons) {
+		//for(String emoticon:emoticons) {
+			//EmojiManager.addEmoticon(emoticon);
+		//}
 		this.emoticons = emoticons;
 	}
 	
