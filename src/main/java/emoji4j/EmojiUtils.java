@@ -8,8 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.hamcrest.Matchers;
+
 /**
  * Utils to deal with emojis
+ * 
  * @author Krishna Chaitanya Thota
  *
  */
@@ -36,7 +38,8 @@ public class EmojiUtils {
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code))));
+						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
+						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
 		return emoji;
 	}
@@ -83,7 +86,7 @@ public class EmojiUtils {
 		String regex = ":\\w+:|&#\\w+;";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(text);
-		
+
 		int counter = 0;
 		while (matcher.find()) {
 			String emojiCode = matcher.group();
@@ -93,21 +96,22 @@ public class EmojiUtils {
 		}
 		return counter;
 	}
-	
+
 	/**
 	 * Counts valid emojis passed string
+	 * 
 	 * @param text
 	 * @return
 	 */
 	public static int countEmojis(String text) {
-		
+
 		String htmlifiedText = htmlify(text);
 
 		// regex to identify html entitities in htmlified text
 		String regex = "&#\\w+;";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(htmlifiedText);
-		
+
 		int counter = 0;
 		while (matcher.find()) {
 			String emojiCode = matcher.group();
