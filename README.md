@@ -167,6 +167,22 @@ emoji = EmojiUtils.getEmoji(";]"); //returns 😉
 
 ```
 
+## Convert Emoticons to Emojis
+
+Supports converting emoticons in a string to Emojis
+
+```
+
+String text=":):-),:-):-]:-xP=*:*<3:P:p,=-)";
+
+EmojiUtils.emojify(text); //returns 😃😃😅😃😶😝😗😗❤️😛😛😅
+		
+text = "A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
+
+EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
