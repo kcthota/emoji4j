@@ -64,9 +64,20 @@ public class EmojiUtils {
 	 */
 	public static String emojify(String text) {
 
-		// regex to identify html entitities and emoji short codes
-		String regex = EmojiManager.getEmoticonRegex()+"|:\\w+:|&#\\w+;";
-		
+		text = processStringWithRegex(text, ":\\w+:|&#\\w+;");
+
+		// emotions should be processed in second go.
+		// this will avoid conflicts with shortcodes. For Example: :p:p should
+		// not
+		// be processed as shortcode, but as emoticon
+		text = processStringWithRegex(text, EmojiManager.getEmoticonRegex());
+
+		return text;
+	}
+
+	private static String processStringWithRegex(String text, String regex) {
+		// String regex = ":\\w+:|&#\\w+;"+EmojiManager.getEmoticonRegex();
+
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();
