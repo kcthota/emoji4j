@@ -19,7 +19,7 @@ Stable:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 </dependency>
 ```
 
@@ -101,7 +101,6 @@ EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends❤️
 String text = "A &#128049;, &#x1f436; and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:."
 
 EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends. For the 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
-
 
 String text=":):-),:-):-]:-xP=*:*<3:P:p,=-)";
 
