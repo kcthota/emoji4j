@@ -22,6 +22,10 @@ public class Emoji {
 	
 	private List<String> emoticons;
 
+	/**
+	 * Gets the unicode emoji character
+	 * @return
+	 */
 	public String getEmoji() {
 		return emoji;
 	}
@@ -33,6 +37,10 @@ public class Emoji {
 		this.emoji = emoji;
 	}
 
+	/**
+	 * Gets the list of all shortcodes for the emoji. shortcode is not enclosed in colons.
+	 * @return
+	 */
 	public List<String> getAliases() {
 		return aliases;
 	}
@@ -41,6 +49,10 @@ public class Emoji {
 		this.aliases = aliases;
 	}
 
+	/**
+	 * Gets the hexadecimal html entity for the emoji
+	 * @return
+	 */
 	public String getHexHtml() {
 		return hexHtml;
 	}
@@ -49,6 +61,10 @@ public class Emoji {
 		this.hexHtml = hexHtml;
 	}
 
+	/**
+	 * Gets the decimal html entity for the emoji
+	 * @return
+	 */
 	public String getDecimalHtml() {
 		return decimalHtml;
 	}
@@ -57,6 +73,10 @@ public class Emoji {
 		this.decimalHtml = decimalHtml;
 	}
 
+	/**
+	 * Gets the list of emoticons associated with the emoji
+	 * @return
+	 */
 	public List<String> getEmoticons() {
 		return emoticons;
 	}

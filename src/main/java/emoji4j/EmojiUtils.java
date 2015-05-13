@@ -75,6 +75,12 @@ public class EmojiUtils {
 		return text;
 	}
 
+	/**
+	 * Common method used for processing the string to replace with emojis
+	 * @param text
+	 * @param regex
+	 * @return
+	 */
 	private static String processStringWithRegex(String text, String regex) {
 		// String regex = ":\\w+:|&#\\w+;"+EmojiManager.getEmoticonRegex();
 
@@ -93,6 +99,11 @@ public class EmojiUtils {
 		return sb.toString();
 	}
 
+	/**
+	 * Replaces emoji shortcodes and emoji html entity tokens in a string
+	 * @param text
+	 * @return
+	 */
 	@Deprecated
 	public static int countEmojiTokens(String text) {
 		// regex to identify html entitities and emoji short codes
