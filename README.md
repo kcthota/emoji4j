@@ -14,6 +14,7 @@ Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoj
 # Usage
 
 Stable:
+
 ```
 <dependency>
 	<groupId>com.kcthota</groupId>
@@ -22,6 +23,7 @@ Stable:
 </dependency>
 ```
 
+<!--
 Latest Snapshot:
 ```
 <dependency>
@@ -30,6 +32,7 @@ Latest Snapshot:
 	<version>2.0-SNAPSHOT</version>
 </dependency>
 ```
+-->
 
 # Examples:
 
@@ -47,8 +50,6 @@ EmojiUtils.getEmoji(":blue_car:").getEmoji(); //also returns 🚙
 EmojiUtils.getEmoji("&#x1f42d;").getEmoji(); //returns 🐭
 
 EmojiUtils.getEmoji("&#128045;").getEmoji(); //also returns 🐭
-
-Coming up in 2.0:
 
 EmojiUtils.getEmoji(":)").getEmoji(); //returns 😃
 
@@ -93,13 +94,18 @@ EmojiUtils.isEmoji("&#128045;"); //returns true
 Emojifies the passed string
 
 ```
-String text = "A :cat:, :dog: and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
+String text = "A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
 
-EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends. For the 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
+EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
 
 String text = "A &#128049;, &#x1f436; and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:."
 
 EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends. For the 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
+
+
+String text=":):-),:-):-]:-xP=*:*<3:P:p,=-)";
+
+EmojiUtils.emojify(text); //returns 😃😃😅😃😶😝😗😗❤️😛😛😅
 
 ```
 
@@ -132,20 +138,6 @@ EmojiUtils.hexHtmlify(text); //returns A &#x1f431;, &#x1f436; and a &#x1f42d; be
 
 ```
 
-## countEmojiTokens
-
-Counts number of short codes, html entities that would be replaced to valid emojis in a string
-
-```
-String text = "A &#128049;, &#x1f436;, :coyote: and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
-
-EmojiUtils.countEmojiTokens(text); //returns 8
-
-```
-
-
-## Coming up in 2.0
-
 ## countEmojis
 
 Counts emojis in a String
@@ -157,35 +149,22 @@ EmojiUtils.countEmojis(text); //returns 8
 
 ```
 
-## countEmojiTokens (@Deprecated)
-countEmojiTokens method would be deprecated in 2.0 and will be removed in subsequent releases. This method only counts tokens in a string and not unicode emojis. Users should migrate to using countEmojis method.
+## countEmojiTokens (Deprecated)
 
-## Get Emoji by Emoticons
-
-Get emoji by emoticons
+Counts number of short codes, html entities that would be replaced to valid emojis in a string. This method has been deprecated in 2.0 and will be removed in subsequent releases. This method only counts tokens in a string and not unicode emojis. Users should migrate to using countEmojis method.
 
 ```
-Emoji emoji = EmojiUtils.getEmoji(":)"); //returns 😃
-		
-emoji = EmojiUtils.getEmoji(";]"); //returns 😉
+String text = "A &#128049;, &#x1f436;, :coyote: and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
+
+EmojiUtils.countEmojiTokens(text); //returns 8
 
 ```
 
-## Convert Emoticons to Emojis
+<!--
 
-Supports converting emoticons in a string to Emojis
+## Coming up in 3.0
 
-```
-
-String text=":):-),:-):-]:-xP=*:*<3:P:p,=-)";
-
-EmojiUtils.emojify(text); //returns 😃😃😅😃😶😝😗😗❤️😛😛😅
-		
-text = "A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
-
-EmojiUtils.emojify(text); //returns A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.
-
-```
+-->
 
 ## License:
 
