@@ -28,8 +28,8 @@
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.5.2</jackson.version>
-		<junit.version>4.11</junit.version>
+		<jackson.version>2.5.3</jackson.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -71,7 +71,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.0</version>
+					<version>3.3</version>
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
@@ -87,7 +87,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.6</version>
+					<version>2.7</version>
 					<configuration>
 						<format>xml</format>
 						<maxmem>256m</maxmem>
