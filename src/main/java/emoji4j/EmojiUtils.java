@@ -100,28 +100,6 @@ public class EmojiUtils {
 	}
 
 	/**
-	 * Replaces emoji shortcodes and emoji html entity tokens in a string
-	 * @param text
-	 * @return
-	 */
-	@Deprecated
-	public static int countEmojiTokens(String text) {
-		// regex to identify html entitities and emoji short codes
-		String regex = ":\\w+:|&#\\w+;";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(text);
-
-		int counter = 0;
-		while (matcher.find()) {
-			String emojiCode = matcher.group();
-			if (isEmoji(emojiCode)) {
-				counter++;
-			}
-		}
-		return counter;
-	}
-
-	/**
 	 * Counts valid emojis passed string
 	 * 
 	 * @param text
