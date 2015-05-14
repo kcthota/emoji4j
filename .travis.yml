@@ -1,4 +1,20 @@
 language: java
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "c3aSegQHJkgnplVVyaFTMzJB0uo6nvP4MTZZRzC1Nqyj+/PupObtC/sHCZuy6atKi3c2ZNRpFfKByXIjF162qKWMXVfLlTyDejtu97D7TChsfKwq+odaMj4mGp7bEClwRvH5wNimkmrrSyBEC8+3/51RIsl6WYr7SqiE87RS6tv/sTSzkiLuMP25RQ5HUG38VRBieLgHbStE5T3kO3gpyk+tLoq2NNcPhSsK/6G+pmqeqkTYViNjH2yOIxO3KUqVO0nlG0PdwQ8m4DEWLGebsg1JXD3kMTnMdXxxPstI4zX2y2RgoVoLDwh7Nfm/S2+RP6eZHpxpsZRUBeCqK+lGLNBSq0HFSQtGoUdwu3bbWWddhPHvLO0P5kIgAi2OB6I1WURIbfIJugKpSZCh7uajBD2WRHpD1Wo/0DOn87i5QbyKHjQHC04P/HlITnyR8MI0gddrmigGGTm2RP33Ji+m/A8OBVu62kDpx3XXLOe5nnoaT3yckACxGWj5l6m+sL6nAdrl6LsHu/9Qrv7oXRlCf2402QjhFpNHWvvG+LalftlvwAQSzYVyRYkEfxhz92sSx4CDKcvkwraQ6D/s10v7ZhKaDwpLxGuFs33ZW/JzEBLECCPdavRnmZJh7924qaiMIElBX7SFPmEVlmZQKXpBYmq8en728Ac0kEwhx2CpCi8="
+
+addons:
+  coverity_scan:
+    project:
+      name: "kcthota/emoji4j"
+      description: "Build submitted via Travis CI"
+    notification_email: kcthota@gmail.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
+
 after_success:
  - mvn clean cobertura:cobertura coveralls:report
