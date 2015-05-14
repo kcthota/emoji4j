@@ -23,7 +23,7 @@ public class EmojiManager {
 			ObjectMapper mapper = new ObjectMapper();
 			InputStream stream = EmojiManager.class.getResourceAsStream("/emoji.json");
 			emojiData = mapper.readValue(stream, TypeFactory.defaultInstance().constructCollectionType(List.class, Emoji.class));
-			
+			stream.close();
 			processEmoticonsToRegex();
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
