@@ -182,4 +182,42 @@ public class EmojiUtils {
 
 		return sb.toString();
 	}
+	
+	public static String shortCodify(String text) {
+		String emojifiedStr = emojify(text);
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i=0;i<emojifiedStr.length();i++) {
+			char ch = emojifiedStr.charAt(i);
+			if(java.lang.Character.isSurrogate(ch)) {
+				i++;
+				char lowSurrogate = emojifiedStr.charAt(i);
+				
+				String surrogateCharacter = new String(new char[] {ch, lowSurrogate});
+				Emoji emoji = EmojiUtils.getEmoji(surrogateCharacter);
+				if(emoji!=null) {
+					sb.append(":"+emoji.getAliases().get(0)+":");
+				} else {
+					sb.append(surrogateCharacter);
+				}
+				
+			} else {
+				
+				if((int)ch > 128) {
+					Emoji emoji = EmojiUtils.getEmoji(new String(new char[] {ch}));
+					if(emoji!=null) {
+						sb.append(":"+emoji.getAliases().get(0)+":");
+					} else {
+						sb.append(ch);
+					}
+				} else {
+					sb.append(ch);
+				}
+			}
+			//System.out.printf("%c - %s\n", ch, java.lang.Character.isSurrogate(ch));
+			
+		}
+		return sb.toString();
+	}
 }
