@@ -183,5 +183,21 @@ public class EmojiUtils {
 
 		return sb.toString();
 	}
+	
+	/**
+	 * Converts emojis, hex, decimal htmls, emoticons in a string to short codes
+	 * @param text
+	 * @return
+	 */
+	public static String shortCodify(String text) {
+		String emojifiedText = emojify(text);
+		
+		//TODO - this approach is ugly, need to find an optimal way to replace the emojis
+		
+		for(Emoji emoji:EmojiManager.data()) {
+			emojifiedText = emojifiedText.replace(emoji.getEmoji(),emoji.getAliases().get(0));
+		}
+		return emojifiedText;
+	}
 
 }

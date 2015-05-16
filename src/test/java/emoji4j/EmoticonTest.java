@@ -26,4 +26,11 @@ public class EmoticonTest {
 		text = "A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
 		assertThat(EmojiUtils.emojify(text)).isEqualTo("A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.");
 	}
+	
+	@Test
+	public void testShortCodify() {
+		for(Emoji e:EmojiManager.data()) {
+			System.out.println(EmojiUtils.shortCodify(e.getEmoji()));
+		}
+	}
 }
