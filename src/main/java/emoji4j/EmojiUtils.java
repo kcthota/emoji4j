@@ -37,8 +37,8 @@ public class EmojiUtils {
 		Emoji emoji = selectFirst(
 				EmojiManager.data(),
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalTo(code)))
+						.or(having(on(Emoji.class).getHexHtml(), Matchers.startsWith(code)))
+						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.startsWith(code)))
 						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
 						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
@@ -77,6 +77,7 @@ public class EmojiUtils {
 
 	/**
 	 * Common method used for processing the string to replace with emojis
+	 * 
 	 * @param text
 	 * @param regex
 	 * @return
@@ -149,7 +150,7 @@ public class EmojiUtils {
 	}
 
 	/**
-	 * Helper to convert characters to html entities in a string
+	 * Helper to convert emoji characters to html entities in a string
 	 * 
 	 * @param text
 	 * @param isHex
@@ -182,47 +183,5 @@ public class EmojiUtils {
 
 		return sb.toString();
 	}
-	
-	public static String shortCodify(String text) {
-		String emojifiedStr = emojify(text);
-		
-		StringBuffer sb = new StringBuffer();
-		
-		for(int i=0;i<emojifiedStr.length();i++) {
-			char ch = emojifiedStr.charAt(i);
-			if(java.lang.Character.isSurrogate(ch)) {
-				i++;
-				char lowSurrogate = emojifiedStr.charAt(i);
-				
-				String surrogateCharacter = new String(new char[] {ch, lowSurrogate});
-				Emoji emoji = EmojiUtils.getEmoji(surrogateCharacter);
-				if(emoji!=null) {
-					sb.append(":"+emoji.getAliases().get(0)+":");
-				} else {
-					sb.append(surrogateCharacter);
-				}
-				
-			} else {
-				
-				if((int)ch > 128) {
-					Emoji emoji = EmojiUtils.getEmoji(new String(new char[] {ch}));
-					if(emoji!=null) {
-						sb.append(":"+emoji.getAliases().get(0)+":");
-					} else {
-						if(i+1<emojifiedStr.length()) {
-						sb.append(ch + "-->"+emojifiedStr.codePointAt(i+1));
-						} else {
-							sb.append(ch+"**");
-						}
-					}
-				} else {
-					sb.append(ch);
-				}
-			}
-			//System.out.printf("%c - %s\n", ch, java.lang.Character.isSurrogate(ch));
-			
-		}
-		return sb.toString();
-	}
-	
+
 }
