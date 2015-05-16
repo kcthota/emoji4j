@@ -5,7 +5,7 @@ emoji4j
 [![Coverage Status](https://img.shields.io/coveralls/kcthota/emoji4j/master.svg)](https://coveralls.io/r/kcthota/emoji4j?branch=master)
 [![Apache 2.0] (https://img.shields.io/github/license/kcthota/emoji4j.svg)] (http://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j)
-[![Java Doc] (https://img.shields.io/badge/javadoc-2.0-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/emoji4j)
+[![Java Doc] (https://img.shields.io/badge/javadoc-3.0-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/emoji4j)
 
 Java library to convert short codes, html entities to emojis and vice-versa.
 
@@ -19,11 +19,11 @@ Stable:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>2.0</version>
+	<version>3.0</version>
 </dependency>
 ```
 
-
+<!--
 Latest Snapshot:
 ```
 <dependency>
@@ -32,7 +32,7 @@ Latest Snapshot:
 	<version>3.0-SNAPSHOT</version>
 </dependency>
 ```
-
+-->
 
 # Examples:
 
@@ -137,31 +137,6 @@ EmojiUtils.hexHtmlify(text); //returns A &#x1f431;, &#x1f436; and a &#x1f42d; be
 
 ```
 
-## countEmojis
-
-Counts emojis in a String
-
-```
-String text = "A &#128049;, &#x1f436;,&nbsp;:coyote: and a :mouse: became friends. For :dog:'s birthday party, they all had 🍔s, :fries:s, :cookie:s and :cake:.";
-
-EmojiUtils.countEmojis(text); //returns 8
-
-```
-
-## countEmojiTokens (Deprecated)
-
-Counts number of short codes, html entities that would be replaced to valid emojis in a string. This method has been deprecated in 2.0 and will be removed in subsequent releases. This method only counts tokens in a string and not unicode emojis. Users should migrate to using countEmojis method.
-
-```
-String text = "A &#128049;, &#x1f436;, :coyote: and a :mouse: became friends. For the :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
-
-EmojiUtils.countEmojiTokens(text); //returns 8
-
-```
-
-
-# Coming up in 3.0
-
 ##shortCodify
 
 ```
@@ -175,9 +150,20 @@ EmojiUtils.shortCodify(text); //returns :smiley::smiley::sweat_smile::smiley::no
 
 ```
 
-##bug fixes
+## countEmojis
 
-Fix for proper handling of html entities when reading emoji data.
+Counts emojis in a String
+
+```
+String text = "A &#128049;, &#x1f436;,&nbsp;:coyote: and a :mouse: became friends. For :dog:'s birthday party, they all had 🍔s, :fries:s, :cookie:s and :cake:.";
+
+EmojiUtils.countEmojis(text); //returns 8
+
+```
+<!--
+# Coming up in 3.0
+
+-->
 
 ## License:
 
