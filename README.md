@@ -173,7 +173,6 @@ text = ":):-),:-):-]:-xP=*:*<3:P:p,=-)";
 
 EmojiUtils.shortCodify(text); //returns :smiley::smiley::sweat_smile::smiley::no_mouth::stuck_out_tongue_closed_eyes::kissing::kissing::heart::stuck_out_tongue::stuck_out_tongue::sweat_smile:
 
-
 ```
 
 #bug fixes
