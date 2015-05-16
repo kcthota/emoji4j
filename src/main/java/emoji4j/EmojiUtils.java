@@ -183,19 +183,28 @@ public class EmojiUtils {
 
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Converts emojis, hex, decimal htmls, emoticons in a string to short codes
+	 * 
 	 * @param text
 	 * @return
 	 */
 	public static String shortCodify(String text) {
 		String emojifiedText = emojify(text);
-		
-		//TODO - this approach is ugly, need to find an optimal way to replace the emojis
-		
-		for(Emoji emoji:EmojiManager.data()) {
-			emojifiedText = emojifiedText.replace(emoji.getEmoji(),emoji.getAliases().get(0));
+
+		// TODO - this approach is ugly, need to find an optimal way to replace
+		// the emojis
+		// could not find an ideal way to identify emojis in the passed string
+		// characters like <3 has multiple characters, but doesn't have
+		// surrogate pairs
+		// so at this point, we iterate through all the emojis and replace with
+		// short codes
+		for (Emoji emoji : EmojiManager.data()) {
+			StringBuilder shortCodeBuilder = new StringBuilder();
+			shortCodeBuilder.append(":").append(emoji.getAliases().get(0)).append(":");
+
+			emojifiedText = emojifiedText.replace(emoji.getEmoji(), shortCodeBuilder.toString());
 		}
 		return emojifiedText;
 	}

@@ -134,4 +134,38 @@ public class EmojiTest {
 				"A 🐱, 🐶 and a 🐭 became friends. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.");
 	}
 
+
+	@Test
+	public void testShortCodifyFromEmojis() {
+		String text = "A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
+		assertThat(EmojiUtils.shortCodify(text))
+				.isEqualTo(
+						"A :cat:, :dog: and a :mouse: became friends:heart:. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.");
+
+	}
+
+	@Test
+	public void testShortCodifyFromEmoticons() {
+		String text = ":):-),:-):-]:-xP=*:*<3:P:p,=-)";
+		String actual = EmojiUtils.shortCodify(text);
+		assertThat(actual)
+				.isEqualTo(
+						":smiley::smiley::sweat_smile::smiley::no_mouth::stuck_out_tongue_closed_eyes::kissing::kissing::heart::stuck_out_tongue::stuck_out_tongue::sweat_smile:");
+
+		assertThat(EmojiUtils.emojify(actual)).isEqualTo("😃😃😅😃😶😝😗😗❤️😛😛😅");
+	}
+
+	@Test
+	public void testShortCodifyFromHtmlEntities() {
+		String text = "A &#128049;, &#128054; and a &#128045; became friends. For &#128054;'s birthday party, they all had &#127828;s, &#127839;s, &#127850;s and &#127856;.";
+		assertThat(EmojiUtils.shortCodify(text))
+				.isEqualTo(
+						"A :cat:, :dog: and a :mouse: became friends. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.");
+
+		text = "A &#x1f431;, &#x1f436; and a &#x1f42d; became friends. For &#x1f436;'s birthday party, they all had &#x1f354;s, &#x1f35f;s, &#x1f36a;s and &#x1f370;.";
+		assertThat(EmojiUtils.shortCodify(text))
+				.isEqualTo(
+						"A :cat:, :dog: and a :mouse: became friends. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.");
+
+	}
 }
