@@ -23,16 +23,16 @@ Stable:
 </dependency>
 ```
 
-<!--
+
 Latest Snapshot:
 ```
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>2.0-SNAPSHOT</version>
+	<version>3.0-SNAPSHOT</version>
 </dependency>
 ```
--->
+
 
 # Examples:
 
@@ -159,11 +159,26 @@ EmojiUtils.countEmojiTokens(text); //returns 8
 
 ```
 
-<!--
 
 ## Coming up in 3.0
 
--->
+#shortCodify
+
+```
+String text = "A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
+
+EmojiUtils.shortCodify(text); //returns A :cat:, :dog: and a :mouse: became friends:heart:. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.
+
+text = ":):-),:-):-]:-xP=*:*<3:P:p,=-)";
+
+EmojiUtils.shortCodify(text); //returns :smiley::smiley::sweat_smile::smiley::no_mouth::stuck_out_tongue_closed_eyes::kissing::kissing::heart::stuck_out_tongue::stuck_out_tongue::sweat_smile:
+
+
+```
+
+#bug fixes
+
+Fix for proper handling of html entities when reading emoji data.
 
 ## License:
 
