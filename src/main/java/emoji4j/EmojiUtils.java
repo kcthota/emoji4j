@@ -132,7 +132,8 @@ public class EmojiUtils {
 	 * @return
 	 */
 	public static String htmlify(String text) {
-		return htmlifyHelper(text, false);
+		String emojifiedStr = emojify(text);
+		return htmlifyHelper(emojifiedStr, false);
 	}
 
 	/**
@@ -143,7 +144,8 @@ public class EmojiUtils {
 	 * @return
 	 */
 	public static String hexHtmlify(String text) {
-		return htmlifyHelper(text, true);
+		String emojifiedStr = emojify(text);
+		return htmlifyHelper(emojifiedStr, true);
 	}
 
 	/**
@@ -153,14 +155,12 @@ public class EmojiUtils {
 	 * @param isHex
 	 * @return
 	 */
-	private static String htmlifyHelper(String text, boolean isHex) {
-
-		String emojifiedStr = emojify(text);
+	public static String htmlifyHelper(String text, boolean isHex) {
 
 		StringBuffer sb = new StringBuffer();
 
-		for (int i = 0; i < emojifiedStr.length(); i++) {
-			int ch = emojifiedStr.codePointAt(i);
+		for (int i = 0; i < text.length(); i++) {
+			int ch = text.codePointAt(i);
 
 			if (ch <= 128) {
 				sb.appendCodePoint(ch);
@@ -209,7 +209,11 @@ public class EmojiUtils {
 					if(emoji!=null) {
 						sb.append(":"+emoji.getAliases().get(0)+":");
 					} else {
-						sb.append(ch);
+						if(i+1<emojifiedStr.length()) {
+						sb.append(ch + "-->"+emojifiedStr.codePointAt(i+1));
+						} else {
+							sb.append(ch+"**");
+						}
 					}
 				} else {
 					sb.append(ch);
@@ -220,4 +224,5 @@ public class EmojiUtils {
 		}
 		return sb.toString();
 	}
+	
 }

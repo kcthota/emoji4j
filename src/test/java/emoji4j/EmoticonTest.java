@@ -27,12 +27,16 @@ public class EmoticonTest {
 		assertThat(EmojiUtils.emojify(text)).isEqualTo("A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.");
 	}
 	
-	@Test
-	public void testParseShortCodes() {
+	//@Test
+	//public void testParseShortCodes() {
 		//String text = "A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.";
-		String text="<3";
-		System.out.println(EmojiUtils.shortCodify(text));
+//		for(Emoji e:EmojiManager.data()) {
+//			
+//			System.out.println(EmojiUtils.shortCodify(e.getEmoji()));
+//		}
+		//String text="🇺";
 		
-		System.out.println(EmojiUtils.htmlify(text));
-	}
+		//System.out.println(EmojiUtils.shortCodify(text));
+		//System.out.println(EmojiUtils.htmlify(text));
+	//}
 }

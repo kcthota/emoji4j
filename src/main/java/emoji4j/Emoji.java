@@ -31,9 +31,8 @@ public class Emoji {
 	}
 
 	public void setEmoji(String emoji) {
-		int htmlcode = Character.codePointAt(emoji, 0);
-		setDecimalHtml("&#" + htmlcode + ";");
-		setHexHtml("&#x" + Integer.toHexString(htmlcode) + ";");
+		setDecimalHtml(EmojiUtils.htmlifyHelper(emoji,false));
+		setHexHtml(EmojiUtils.htmlifyHelper(emoji,true));
 		this.emoji = emoji;
 	}
 
