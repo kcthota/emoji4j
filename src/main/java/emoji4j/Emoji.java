@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Emoji {
+public class Emoji extends AbstractEmoji {
 
 	private String emoji;
 

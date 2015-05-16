@@ -15,7 +15,7 @@ import org.hamcrest.Matchers;
  * @author Krishna Chaitanya Thota
  *
  */
-public class EmojiUtils {
+public class EmojiUtils extends AbstractEmoji {
 
 	/**
 	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
@@ -149,40 +149,7 @@ public class EmojiUtils {
 		return htmlifyHelper(emojifiedStr, true);
 	}
 
-	/**
-	 * Helper to convert emoji characters to html entities in a string
-	 * 
-	 * @param text
-	 * @param isHex
-	 * @return
-	 */
-	public static String htmlifyHelper(String text, boolean isHex) {
-
-		StringBuffer sb = new StringBuffer();
-
-		for (int i = 0; i < text.length(); i++) {
-			int ch = text.codePointAt(i);
-
-			if (ch <= 128) {
-				sb.appendCodePoint(ch);
-			} else if (ch > 128 && (ch < 159 || (ch >= 55296 && ch <= 57343))) {
-				// don't write illegal html characters
-				// refer
-				// http://en.wikipedia.org/wiki/Character_encodings_in_HTML
-				// Illegal characters section
-				continue;
-			} else {
-				if (isHex) {
-					sb.append("&#x" + Integer.toHexString(ch) + ";");
-				} else {
-					sb.append("&#" + ch + ";");
-				}
-			}
-
-		}
-
-		return sb.toString();
-	}
+	
 
 	/**
 	 * Converts emojis, hex, decimal htmls, emoticons in a string to short codes
