@@ -160,9 +160,9 @@ EmojiUtils.countEmojiTokens(text); //returns 8
 ```
 
 
-## Coming up in 3.0
+# Coming up in 3.0
 
-#shortCodify
+##shortCodify
 
 ```
 String text = "A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
@@ -175,7 +175,7 @@ EmojiUtils.shortCodify(text); //returns :smiley::smiley::sweat_smile::smiley::no
 
 ```
 
-#bug fixes
+##bug fixes
 
 Fix for proper handling of html entities when reading emoji data.
 
