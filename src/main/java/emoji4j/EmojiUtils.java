@@ -17,6 +17,12 @@ import org.hamcrest.Matchers;
  */
 public class EmojiUtils extends AbstractEmoji {
 
+	private static final Pattern shortCodePattern = Pattern.compile(":(\\w+):");
+	
+	private static final Pattern htmlEntityPattern = Pattern.compile("&#\\w+;");
+	
+	private static final Pattern shortCodeOrHtmlEntityPattern = Pattern.compile(":\\w+:|&#\\w+;");
+	
 	/**
 	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
 	 * entity
@@ -26,8 +32,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 */
 	public static Emoji getEmoji(String code) {
 
-		Pattern pattern = Pattern.compile(":(\\w+):");
-		Matcher m = pattern.matcher(code);
+		Matcher m = shortCodePattern.matcher(code);
 
 		// test for shortcode with colons
 		if (m.find()) {
@@ -64,13 +69,13 @@ public class EmojiUtils extends AbstractEmoji {
 	 */
 	public static String emojify(String text) {
 
-		text = processStringWithRegex(text, ":\\w+:|&#\\w+;");
+		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern);
 
 		// emotions should be processed in second go.
 		// this will avoid conflicts with shortcodes. For Example: :p:p should
 		// not
 		// be processed as shortcode, but as emoticon
-		text = processStringWithRegex(text, EmojiManager.getEmoticonRegex());
+		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern());
 
 		return text;
 	}
@@ -82,10 +87,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @param regex
 	 * @return
 	 */
-	private static String processStringWithRegex(String text, String regex) {
-		// String regex = ":\\w+:|&#\\w+;"+EmojiManager.getEmoticonRegex();
-
-		Pattern pattern = Pattern.compile(regex);
+	private static String processStringWithRegex(String text, Pattern pattern) {
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();
 
@@ -109,11 +111,8 @@ public class EmojiUtils extends AbstractEmoji {
 	public static int countEmojis(String text) {
 
 		String htmlifiedText = htmlify(text);
-
 		// regex to identify html entitities in htmlified text
-		String regex = "&#\\w+;";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(htmlifiedText);
+		Matcher matcher = htmlEntityPattern.matcher(htmlifiedText);
 
 		int counter = 0;
 		while (matcher.find()) {

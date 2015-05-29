@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  *
  */
 public class EmojiManager {
-	private static String emoticonRegex;
+	private static Pattern emoticonRegexPattern;
 	
 	private static List<Emoji> emojiData;
 
@@ -42,8 +42,8 @@ public class EmojiManager {
 	 * Returns the Regex which can match all emoticons in a string
 	 * @return
 	 */
-	public static String getEmoticonRegex() {
-		return emoticonRegex;
+	public static Pattern getEmoticonRegexPattern() {
+		return emoticonRegexPattern;
 	}
 
 
@@ -84,6 +84,6 @@ public class EmojiManager {
 			sb.append(Pattern.quote(emoticon));
 		}
 		
-		emoticonRegex = sb.toString();
+		emoticonRegexPattern = Pattern.compile(sb.toString());
 	}
 }
