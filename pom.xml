@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.5.4</jackson.version>
+		<jackson.version>2.6.2</jackson.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>2.0.0</version>
+			<version>3.2.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -73,16 +73,16 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.3</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-						<testSource>1.7</testSource>
-						<testTarget>1.7</testTarget>
+						<source>1.8</source>
+						<target>1.8</target>
+						<testSource>1.8</testSource>
+						<testTarget>1.8</testTarget>
 					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.eluder.coveralls</groupId>
 					<artifactId>coveralls-maven-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>4.0.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
