@@ -576,7 +576,8 @@
     "emoji": "😡"
   , "description": "pouting face"
   , "aliases": [
-      "rage"
+      "rage",
+      "pout"
     ]
   , "tags": [
       "angry"
