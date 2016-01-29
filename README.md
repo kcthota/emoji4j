@@ -5,7 +5,7 @@ emoji4j
 [![Coverage Status](https://img.shields.io/coveralls/kcthota/emoji4j/master.svg)](https://coveralls.io/r/kcthota/emoji4j?branch=master)
 [![Apache 2.0] (https://img.shields.io/github/license/kcthota/emoji4j.svg)] (http://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j)
-[![Java Doc] (https://img.shields.io/badge/javadoc-3.0-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/emoji4j)
+[![Java Doc] (https://img.shields.io/badge/javadoc-4.0-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/emoji4j)
 
 Java library to convert short codes, html entities to emojis and vice-versa.
 
@@ -19,7 +19,7 @@ Stable:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>3.0</version>
+	<version>4.0</version>
 </dependency>
 ```
 
@@ -147,6 +147,16 @@ EmojiUtils.shortCodify(text); //returns A :cat:, :dog: and a :mouse: became frie
 text = ":):-),:-):-]:-xP=*:*<3:P:p,=-)";
 
 EmojiUtils.shortCodify(text); //returns :smiley::smiley::sweat_smile::smiley::no_mouth::stuck_out_tongue_closed_eyes::kissing::kissing::heart::stuck_out_tongue::stuck_out_tongue::sweat_smile:
+
+```
+
+## RemoveAllEmojis
+Removes unicode emoji characters from the passed string
+
+```
+String emojiText = "A 🐱, 🐱 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
+
+EmojiUtils.removeAllEmojis(emojiText);//"A ,  and a  became friends. For 's birthday party, they all had s, s, s and .
 
 ```
 
