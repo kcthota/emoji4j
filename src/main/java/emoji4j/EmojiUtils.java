@@ -27,7 +27,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
 	 * entity
 	 * 
-	 * @param code
+	 * @param code unicode, short code, decimal html entity or hexadecimal html
 	 * @return Emoji
 	 */
 	public static Emoji getEmoji(String code) {
@@ -54,8 +54,8 @@ public class EmojiUtils extends AbstractEmoji {
 	 * Checks if an Emoji exists for the unicode, short code, decimal or
 	 * hexadecimal html entity
 	 * 
-	 * @param code
-	 * @return
+	 * @param code unicode, short code, decimal html entity or hexadecimal html
+	 * @return is emoji
 	 */
 	public static boolean isEmoji(String code) {
 		return getEmoji(code) == null ? false : true;
@@ -64,8 +64,8 @@ public class EmojiUtils extends AbstractEmoji {
 	/**
 	 * Converts emoji short codes or html entities in string with emojis
 	 * 
-	 * @param text
-	 * @return
+	 * @param text String to emojify
+	 * @return emojified String
 	 */
 	public static String emojify(String text) {
 
@@ -105,8 +105,8 @@ public class EmojiUtils extends AbstractEmoji {
 	/**
 	 * Counts valid emojis passed string
 	 * 
-	 * @param text
-	 * @return
+	 * @param text String to count emoji characters in.
+	 * @return returns count of emojis
 	 */
 	public static int countEmojis(String text) {
 
@@ -128,8 +128,8 @@ public class EmojiUtils extends AbstractEmoji {
 	 * Converts unicode characters in text to corresponding decimal html
 	 * entities
 	 * 
-	 * @param text
-	 * @return
+	 * @param text String to htmlify
+	 * @return htmlified String
 	 */
 	public static String htmlify(String text) {
 		String emojifiedStr = emojify(text);
@@ -140,8 +140,8 @@ public class EmojiUtils extends AbstractEmoji {
 	 * Converts unicode characters in text to corresponding hexadecimal html
 	 * entities
 	 * 
-	 * @param text
-	 * @return
+	 * @param text String to hexHtmlify
+	 * @return hexadecimal htmlified string
 	 */
 	public static String hexHtmlify(String text) {
 		String emojifiedStr = emojify(text);
@@ -153,8 +153,8 @@ public class EmojiUtils extends AbstractEmoji {
 	/**
 	 * Converts emojis, hex, decimal htmls, emoticons in a string to short codes
 	 * 
-	 * @param text
-	 * @return
+	 * @param text String to shortcodify
+	 * @return shortcodified string
 	 */
 	public static String shortCodify(String text) {
 		String emojifiedText = emojify(text);
@@ -178,8 +178,8 @@ public class EmojiUtils extends AbstractEmoji {
 	/**
 	 * Removes all emoji characters from the passed string. This method does not remove html characters, shortcodes.
 	 * To remove all shortcodes, html characters, emojify and then pass the emojified string to this method.
-	 * @param text
-	 * @return
+	 * @param emojiText String to remove emoji's from.
+	 * @return emoji stripped string
 	 */
 	public static String removeAllEmojis(String emojiText) {
 		

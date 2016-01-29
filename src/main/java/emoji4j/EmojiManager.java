@@ -32,7 +32,7 @@ public class EmojiManager {
 
 	/**
 	 * Returns the complete emoji data
-	 * @return
+	 * @return List of emoji objects
 	 */
 	public static List<Emoji> data() {
 		return emojiData;
@@ -40,7 +40,7 @@ public class EmojiManager {
 	
 	/**
 	 * Returns the Regex which can match all emoticons in a string
-	 * @return
+	 * @return regex pattern for emoticons
 	 */
 	public static Pattern getEmoticonRegexPattern() {
 		return emoticonRegexPattern;

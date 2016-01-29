@@ -24,7 +24,7 @@ public class Emoji extends AbstractEmoji {
 
 	/**
 	 * Gets the unicode emoji character
-	 * @return
+	 * @return Emoji String
 	 */
 	public String getEmoji() {
 		return emoji;
@@ -38,7 +38,7 @@ public class Emoji extends AbstractEmoji {
 
 	/**
 	 * Gets the list of all shortcodes for the emoji. shortcode is not enclosed in colons.
-	 * @return
+	 * @return List of all aliases
 	 */
 	public List<String> getAliases() {
 		return aliases;
@@ -50,7 +50,7 @@ public class Emoji extends AbstractEmoji {
 
 	/**
 	 * Gets the hexadecimal html entity for the emoji
-	 * @return
+	 * @return the hexadecimal html string
 	 */
 	public String getHexHtml() {
 		return hexHtml;
@@ -62,7 +62,7 @@ public class Emoji extends AbstractEmoji {
 
 	/**
 	 * Gets the decimal html entity for the emoji
-	 * @return
+	 * @return the decimal html string
 	 */
 	public String getDecimalHtml() {
 		return decimalHtml;
@@ -74,7 +74,7 @@ public class Emoji extends AbstractEmoji {
 
 	/**
 	 * Gets the list of emoticons associated with the emoji
-	 * @return
+	 * @return List of all emoticons associated with the emoji
 	 */
 	public List<String> getEmoticons() {
 		return emoticons;

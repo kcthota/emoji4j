@@ -10,9 +10,9 @@ public abstract class AbstractEmoji {
 	/**
 	 * Helper to convert emoji characters to html entities in a string
 	 * 
-	 * @param text
-	 * @param isHex
-	 * @return
+	 * @param text String to htmlify
+	 * @param isHex isHex
+	 * @return htmlified string
 	 */
 	protected static String htmlifyHelper(String text, boolean isHex) {
 
