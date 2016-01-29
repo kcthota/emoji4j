@@ -168,4 +168,10 @@ public class EmojiTest {
 						"A :cat:, :dog: and a :mouse: became friends. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.");
 
 	}
+	
+	@Test
+	public void removeAllEmojisTest() {
+		String emojiText = "A 🐱, 🐱 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
+		assertThat(EmojiUtils.removeAllEmojis(emojiText)).isEqualTo("A ,  and a  became friends. For 's birthday party, they all had s, s, s and .");
+	}
 }

@@ -174,5 +174,19 @@ public class EmojiUtils extends AbstractEmoji {
 		}
 		return emojifiedText;
 	}
+	
+	/**
+	 * Removes all emoji characters from the passed string. This method does not remove html characters, shortcodes.
+	 * To remove all shortcodes, html characters, emojify and then pass the emojified string to this method.
+	 * @param text
+	 * @return
+	 */
+	public static String removeAllEmojis(String emojiText) {
+		
+		for (Emoji emoji : EmojiManager.data()) {
+			emojiText = emojiText.replace(emoji.getEmoji(), "");
+		}
+		return emojiText;
+	}
 
 }
