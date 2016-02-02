@@ -211,3 +211,7 @@ Copyright (c) 2013 Apple Inc. All rights reserved.
 [wooorm/emoticon's] (https://github.com/wooorm/emoticon) license:
 
 Copyright (c) 2014 Titus Wormer <tituswormer@gmail.com>
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kcthota/emoji4j/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
