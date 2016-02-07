@@ -20,6 +20,8 @@ public class Emoji extends AbstractEmoji {
 
 	private String decimalHtml;
 	
+	private String decimalSurrogateHtml;
+	
 	private List<String> emoticons;
 
 	/**
@@ -31,8 +33,10 @@ public class Emoji extends AbstractEmoji {
 	}
 
 	public void setEmoji(String emoji) {
-		setDecimalHtml(EmojiUtils.htmlifyHelper(emoji,false));
-		setHexHtml(EmojiUtils.htmlifyHelper(emoji,true));
+		setDecimalHtml(EmojiUtils.htmlifyHelper(emoji,false, false));
+		setHexHtml(EmojiUtils.htmlifyHelper(emoji,true, false));
+		
+		setDecimalSurrogateHtml(EmojiUtils.htmlifyHelper(emoji,false, true));
 		this.emoji = emoji;
 	}
 
@@ -85,6 +89,14 @@ public class Emoji extends AbstractEmoji {
 			//EmojiManager.addEmoticon(emoticon);
 		//}
 		this.emoticons = emoticons;
+	}
+
+	public String getDecimalSurrogateHtml() {
+		return decimalSurrogateHtml;
+	}
+
+	public void setDecimalSurrogateHtml(String decimalSurrogateHtml) {
+		this.decimalSurrogateHtml = decimalSurrogateHtml;
 	}
 	
 	
