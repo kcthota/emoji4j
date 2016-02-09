@@ -174,4 +174,24 @@ public class EmojiTest {
 		String emojiText = "A 🐱, 🐱 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
 		assertThat(EmojiUtils.removeAllEmojis(emojiText)).isEqualTo("A ,  and a  became friends. For 's birthday party, they all had s, s, s and .");
 	}
+	
+	@Test
+	public void surrogateDecimalToEmojiTest() {
+		String emojiText = "A &#55357;&#56369;, &#x1f436;&#55357;&#56369; and a &#55357;&#56365; became friends. They had &#junk;&#55356;&#57172;&#junk; :-)";
+		
+		assertThat(EmojiUtils.emojify(emojiText)).isEqualTo("A 🐱, 🐶🐱 and a 🐭 became friends. They had &#junk;🍔&#junk; 😃");
+		System.out.println(EmojiUtils.emojify(emojiText));
+		
+		emojiText = "&#junk;&#55357;&#56374;&#55357;&#56369;&junk;&#x1f42d;";
+		assertThat(EmojiUtils.emojify(emojiText)).isEqualTo("&#junk;🐶🐱&junk;🐭");
+	}
+	
+	@Test
+	public void toSurrogateDecimalTest() {
+		String text = "😃😃😅😃😶😝😗😗❤️😛😛😅";
+		assertThat(EmojiUtils.htmlify(text, true)).isEqualTo("&#55357;&#56835;&#55357;&#56835;&#55357;&#56837;&#55357;&#56835;&#55357;&#56886;&#55357;&#56861;&#55357;&#56855;&#55357;&#56855;&#55242;&#56164;&#55296;&#55823;&#55357;&#56859;&#55357;&#56859;&#55357;&#56837;");
+		System.out.println(EmojiUtils.htmlify("❤️"));
+		
+		System.out.println(EmojiUtils.emojify("&#55357;&#56835;&#55357;&#56835;&#55357;&#56837;&#55357;&#56835;&#55357;&#56886;&#55357;&#56861;&#55357;&#56855;&#55357;&#56855;&#55242;&#56164;&#55296;&#55823;&#55357;&#56859;&#55357;&#56859;&#55357;&#56837;&#10084;"));
+	}
 }

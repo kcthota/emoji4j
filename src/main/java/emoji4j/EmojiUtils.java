@@ -21,7 +21,11 @@ public class EmojiUtils extends AbstractEmoji {
 	
 	private static final Pattern htmlEntityPattern = Pattern.compile("&#\\w+;");
 	
-	private static final Pattern shortCodeOrHtmlEntityPattern = Pattern.compile(":\\w+:|&#\\w+;");
+	private static final Pattern htmlSurrogateEntityPattern = Pattern.compile("&#\\w+;&#\\w+;");
+	
+	private static final Pattern htmlSurrogateEntityPattern2 = Pattern.compile("&#\\w+;&#\\w+;&#\\w+;&#\\w+;");
+	
+	private static final Pattern shortCodeOrHtmlEntityPattern = Pattern.compile(":\\w+:|(?<H1>&#\\w+;)(?<H2>&#\\w+;)(?<L1>&#\\w+;)(?<L2>&#\\w+;)|(?<H>&#\\w+;)(?<L>&#\\w+;)|&#\\w+;");
 	
 	/**
 	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
@@ -33,17 +37,19 @@ public class EmojiUtils extends AbstractEmoji {
 	public static Emoji getEmoji(String code) {
 
 		Matcher m = shortCodePattern.matcher(code);
+		
 
 		// test for shortcode with colons
 		if (m.find()) {
 			code = m.group(1);
 		}
-
+		
 		Emoji emoji = selectFirst(
 				EmojiManager.data(),
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
 						.or(having(on(Emoji.class).getHexHtml(), Matchers.startsWith(code)))
 						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.startsWith(code)))
+						.or(having(on(Emoji.class).getDecimalSurrogateHtml(), Matchers.startsWith(code)))
 						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
 						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
@@ -68,14 +74,18 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return emojified String
 	 */
 	public static String emojify(String text) {
-
-		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern);
-
+		return emojify(text, 0);
+		
+	}
+	
+	private static String emojify(String text, int startIndex) {
+		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern, startIndex);
+		
 		// emotions should be processed in second go.
 		// this will avoid conflicts with shortcodes. For Example: :p:p should
 		// not
 		// be processed as shortcode, but as emoticon
-		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern());
+		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern(), startIndex);
 
 		return text;
 	}
@@ -87,18 +97,54 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @param regex
 	 * @return
 	 */
-	private static String processStringWithRegex(String text, Pattern pattern) {
+	private static String processStringWithRegex(String text, Pattern pattern, int startIndex) {
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();
-
+		int resetIndex = 0;
+		
+		if(startIndex > 0) {
+			matcher.region(startIndex, text.length());
+		} 
+		
 		while (matcher.find()) {
+			
 			String emojiCode = matcher.group();
+			
 			Emoji emoji = getEmoji(emojiCode);
 			// replace matched tokens with emojis
-			matcher.appendReplacement(sb, emoji == null ? emojiCode : emoji.getEmoji());
-		}
+			
+			if(emoji!=null) {
+				matcher.appendReplacement(sb, emoji.getEmoji());
+			} else {
+				if(htmlSurrogateEntityPattern2.matcher(emojiCode).matches()) {
+					String highSurrogate1 = matcher.group("H1");
+					String highSurrogate2 = matcher.group("H2");
+					String lowSurrogate1 = matcher.group("L1");
+					String lowSurrogate2 = matcher.group("L2");
+					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate1+highSurrogate2, htmlSurrogateEntityPattern, 0));
+					resetIndex = sb.length();
+					sb.append(lowSurrogate1);
+					sb.append(lowSurrogate2);
+					break;
+				} else if(htmlSurrogateEntityPattern.matcher(emojiCode).matches()) {
+					//could be individual html entities assumed as surrogate pair
+					String highSurrogate = matcher.group("H");
+					String lowSurrogate = matcher.group("L");
+					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate, htmlEntityPattern, 0));
+					resetIndex = sb.length();
+					sb.append(lowSurrogate);
+					break;
+				} else {
+					matcher.appendReplacement(sb, emojiCode);
+				}
+			}
 
+		}
 		matcher.appendTail(sb);
+		
+		if(resetIndex > 0) {
+			return emojify(sb.toString(), resetIndex);
+		}
 		return sb.toString();
 	}
 
@@ -133,9 +179,14 @@ public class EmojiUtils extends AbstractEmoji {
 	 */
 	public static String htmlify(String text) {
 		String emojifiedStr = emojify(text);
-		return htmlifyHelper(emojifiedStr, false);
+		return htmlifyHelper(emojifiedStr, false, false);
 	}
 
+	public static String htmlify(String text, boolean asSurrogate) {
+		String emojifiedStr = emojify(text);
+		return htmlifyHelper(emojifiedStr, false, asSurrogate);
+	}
+	
 	/**
 	 * Converts unicode characters in text to corresponding hexadecimal html
 	 * entities
@@ -145,7 +196,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 */
 	public static String hexHtmlify(String text) {
 		String emojifiedStr = emojify(text);
-		return htmlifyHelper(emojifiedStr, true);
+		return htmlifyHelper(emojifiedStr, true, false);
 	}
 
 	
