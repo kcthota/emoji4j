@@ -7,7 +7,7 @@ emoji4j
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j)
 [![Java Doc] (https://img.shields.io/badge/javadoc-4.0-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/emoji4j)
 
-Java library to convert short codes, html entities to emojis and vice-versa. Also supports parsing emoticons.
+Java library to convert short codes, html entities to emojis and vice-versa. Also supports parsing emoticons, surrogate html entities.
 
 Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji] (https://github.com/github/gemoji) and ASCII emoticons data from [wooorm/emoticon] (https://github.com/wooorm/emoticon).
 
@@ -19,7 +19,7 @@ Stable:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>4.0</version>
+	<version>5.0</version>
 </dependency>
 ```
 
@@ -52,6 +52,8 @@ EmojiUtils.getEmoji("&#x1f42d;").getEmoji(); //returns 🐭
 EmojiUtils.getEmoji("&#128045;").getEmoji(); //also returns 🐭
 
 EmojiUtils.getEmoji(":)").getEmoji(); //returns 😃
+
+EmojiUtils.getEmoji("&#55357;&#56833;").getEmoji(); //returns 😁
 
 ```
 
@@ -134,6 +136,17 @@ EmojiUtils.hexHtmlify(text); //returns A &#x1f431;, &#x1f436; and a &#x1f42d; be
 String text = "A 🐱, 🐶 and a 🐭 became friends. For the 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰."
 
 EmojiUtils.hexHtmlify(text); //returns A &#x1f431;, &#x1f436; and a &#x1f42d; became friends. For the &#x1f436;'s birthday party, they all had &#x1f354;s, &#x1f35f;s, &#x1f36a;s and &#x1f370;.
+
+```
+
+## htmlify as Surrogate Entities
+
+Converts unicode characters in text to corresponding decimal surrogate html entities
+
+```
+String text = "😃";
+
+EmojiUtils.htmlify(text, true); //returns &#55357;&#56835;
 
 ```
 
