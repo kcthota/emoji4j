@@ -144,6 +144,8 @@ public class EmojiUtils extends AbstractEmoji {
 		}
 		matcher.appendTail(sb);
 		
+		//do not recurse emojify when coming here through htmlSurrogateEntityPattern2..so we get a chance to check if the tail
+		//is part of a surrogate entity
 		if(recurseEmojify && resetIndex > 0) {
 			return emojify(sb.toString(), resetIndex);
 		}
