@@ -190,7 +190,7 @@ EmojiUtils.countEmojis(text); //returns 8
 
 ## License:
 
-Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
+Copyright 2016 Krishna Chaitanya Thota (kcthota@gmail.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.
