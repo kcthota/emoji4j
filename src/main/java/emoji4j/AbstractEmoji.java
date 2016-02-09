@@ -1,5 +1,7 @@
 package emoji4j;
 
+import java.util.regex.Pattern;
+
 /**
  * 
  * @author chait
@@ -7,6 +9,16 @@ package emoji4j;
  */
 public abstract class AbstractEmoji {
 
+	protected static final Pattern shortCodePattern = Pattern.compile(":(\\w+):");
+	
+	protected static final Pattern htmlEntityPattern = Pattern.compile("&#\\w+;");
+	
+	protected static final Pattern htmlSurrogateEntityPattern = Pattern.compile("(?<H>&#\\w+;)(?<L>&#\\w+;)");
+	
+	protected static final Pattern htmlSurrogateEntityPattern2 = Pattern.compile("&#\\w+;&#\\w+;&#\\w+;&#\\w+;");
+	
+	protected static final Pattern shortCodeOrHtmlEntityPattern = Pattern.compile(":\\w+:|(?<H1>&#\\w+;)(?<H2>&#\\w+;)(?<L1>&#\\w+;)(?<L2>&#\\w+;)|(?<H>&#\\w+;)(?<L>&#\\w+;)|&#\\w+;");
+	
 	/**
 	 * Helper to convert emoji characters to html entities in a string
 	 * 

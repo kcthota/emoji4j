@@ -17,15 +17,6 @@ import org.hamcrest.Matchers;
  */
 public class EmojiUtils extends AbstractEmoji {
 
-	private static final Pattern shortCodePattern = Pattern.compile(":(\\w+):");
-	
-	private static final Pattern htmlEntityPattern = Pattern.compile("&#\\w+;");
-	
-	private static final Pattern htmlSurrogateEntityPattern = Pattern.compile("&#\\w+;&#\\w+;");
-	
-	private static final Pattern htmlSurrogateEntityPattern2 = Pattern.compile("&#\\w+;&#\\w+;&#\\w+;&#\\w+;");
-	
-	private static final Pattern shortCodeOrHtmlEntityPattern = Pattern.compile(":\\w+:|(?<H1>&#\\w+;)(?<H2>&#\\w+;)(?<L1>&#\\w+;)(?<L2>&#\\w+;)|(?<H>&#\\w+;)(?<L>&#\\w+;)|&#\\w+;");
 	
 	/**
 	 * Get emoji by unicode, short code, decimal html entity or hexadecimal html
@@ -47,9 +38,11 @@ public class EmojiUtils extends AbstractEmoji {
 		Emoji emoji = selectFirst(
 				EmojiManager.data(),
 				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getHexHtml(), Matchers.startsWith(code)))
-						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.startsWith(code)))
-						.or(having(on(Emoji.class).getDecimalSurrogateHtml(), Matchers.startsWith(code)))
+						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalToIgnoringCase(code)))
+						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalToIgnoringCase(code)))
+						.or(having(on(Emoji.class).getDecimalSurrogateHtml(), Matchers.equalToIgnoringCase(code)))
+						.or(having(on(Emoji.class).getHexHtmlShort(), Matchers.equalToIgnoringCase(code)))
+						.or(having(on(Emoji.class).getDecimalHtmlShort(), Matchers.equalToIgnoringCase(code)))
 						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
 						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
@@ -79,13 +72,13 @@ public class EmojiUtils extends AbstractEmoji {
 	}
 	
 	private static String emojify(String text, int startIndex) {
-		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern, startIndex);
+		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern, startIndex, true);
 		
 		// emotions should be processed in second go.
 		// this will avoid conflicts with shortcodes. For Example: :p:p should
 		// not
 		// be processed as shortcode, but as emoticon
-		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern(), startIndex);
+		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern(), startIndex, true);
 
 		return text;
 	}
@@ -97,7 +90,8 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @param regex
 	 * @return
 	 */
-	private static String processStringWithRegex(String text, Pattern pattern, int startIndex) {
+	private static String processStringWithRegex(String text, Pattern pattern, int startIndex, boolean recurseEmojify) {
+		//System.out.println(text);
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();
 		int resetIndex = 0;
@@ -121,8 +115,16 @@ public class EmojiUtils extends AbstractEmoji {
 					String highSurrogate2 = matcher.group("H2");
 					String lowSurrogate1 = matcher.group("L1");
 					String lowSurrogate2 = matcher.group("L2");
-					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate1+highSurrogate2, htmlSurrogateEntityPattern, 0));
-					resetIndex = sb.length();
+					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate1+highSurrogate2, shortCodeOrHtmlEntityPattern, 0, false));
+					
+					//basically this handles &#junk1;&#10084;&#65039;&#junk2; scenario
+					//verifies if &#junk1;&#10084; or &#junk1; are valid emojis via recursion
+					//if not move past &#junk1; and reset the cursor to &#10084;
+					if(sb.toString().endsWith(highSurrogate2)) {
+						resetIndex = sb.length() - highSurrogate2.length();
+					} else {
+						resetIndex = sb.length();
+					}
 					sb.append(lowSurrogate1);
 					sb.append(lowSurrogate2);
 					break;
@@ -130,7 +132,7 @@ public class EmojiUtils extends AbstractEmoji {
 					//could be individual html entities assumed as surrogate pair
 					String highSurrogate = matcher.group("H");
 					String lowSurrogate = matcher.group("L");
-					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate, htmlEntityPattern, 0));
+					matcher.appendReplacement(sb, processStringWithRegex(highSurrogate, htmlEntityPattern, 0, true));
 					resetIndex = sb.length();
 					sb.append(lowSurrogate);
 					break;
@@ -142,7 +144,7 @@ public class EmojiUtils extends AbstractEmoji {
 		}
 		matcher.appendTail(sb);
 		
-		if(resetIndex > 0) {
+		if(recurseEmojify && resetIndex > 0) {
 			return emojify(sb.toString(), resetIndex);
 		}
 		return sb.toString();

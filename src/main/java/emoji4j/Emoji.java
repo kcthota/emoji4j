@@ -1,6 +1,7 @@
 package emoji4j;
 
 import java.util.List;
+import java.util.regex.Matcher;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,6 +20,10 @@ public class Emoji extends AbstractEmoji {
 	private String hexHtml;
 
 	private String decimalHtml;
+	
+	private String decimalHtmlShort;
+	
+	private String hexHtmlShort;
 	
 	private String decimalSurrogateHtml;
 	
@@ -62,6 +67,13 @@ public class Emoji extends AbstractEmoji {
 
 	public void setHexHtml(String hexHtml) {
 		this.hexHtml = hexHtml;
+		Matcher matcher = htmlSurrogateEntityPattern.matcher(hexHtml);
+		if(matcher.find()) {
+			String signifiantHtmlEntity = matcher.group("H");
+			this.setHexHtmlShort(signifiantHtmlEntity);
+		} else {
+			this.setHexHtmlShort(hexHtml);
+		}
 	}
 
 	/**
@@ -73,7 +85,15 @@ public class Emoji extends AbstractEmoji {
 	}
 
 	public void setDecimalHtml(String decimalHtml) {
+		
 		this.decimalHtml = decimalHtml;
+		Matcher matcher = htmlSurrogateEntityPattern.matcher(decimalHtml);
+		if(matcher.find()) {
+			String signifiantHtmlEntity = matcher.group("H");
+			this.setDecimalHtmlShort(signifiantHtmlEntity);
+		} else {
+			this.setDecimalHtmlShort(decimalHtml);
+		}
 	}
 
 	/**
@@ -98,6 +118,23 @@ public class Emoji extends AbstractEmoji {
 	public void setDecimalSurrogateHtml(String decimalSurrogateHtml) {
 		this.decimalSurrogateHtml = decimalSurrogateHtml;
 	}
+
+	public String getDecimalHtmlShort() {
+		return decimalHtmlShort;
+	}
+
+	public void setDecimalHtmlShort(String decimalHtmlShort) {
+		this.decimalHtmlShort = decimalHtmlShort;
+	}
+
+	public String getHexHtmlShort() {
+		return hexHtmlShort;
+	}
+
+	public void setHexHtmlShort(String hexHtmlShort) {
+		this.hexHtmlShort = hexHtmlShort;
+	}
+	
 	
 	
 }
