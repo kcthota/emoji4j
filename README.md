@@ -10,7 +10,7 @@ emoji4j
 
 Java library to convert short codes, html entities to emojis and vice-versa. Also supports parsing emoticons, surrogate html entities.
 
-Inspired by [vdurmont/emoji-java] (https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji] (https://github.com/github/gemoji) and ASCII emoticons data from [wooorm/emoticon] (https://github.com/wooorm/emoticon).
+Inspired by [vdurmont/emoji-java](https://github.com/vdurmont/emoji-java), emoji4j adds more goodies and helpers to deal with emojis. The emoji data is based on the database from [github/gemoji](https://github.com/github/gemoji) and ASCII emoticons data from [wooorm/emoticon](https://github.com/wooorm/emoticon).
 
 # Usage
 
@@ -205,7 +205,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-[github/gemoji's] (https://github.com/github/gemoji) license:
+[github/gemoji's](https://github.com/github/gemoji) license:
 
 octocat, squirrel, shipit
 Copyright (c) 2013 GitHub Inc. All rights reserved.
@@ -222,7 +222,7 @@ Copyright (c) 2013 whynne@deviantart. All rights reserved.
 All other images
 Copyright (c) 2013 Apple Inc. All rights reserved.
 
-[wooorm/emoticon's] (https://github.com/wooorm/emoticon) license:
+[wooorm/emoticon's](https://github.com/wooorm/emoticon) license:
 
 Copyright (c) 2014 Titus Wormer <tituswormer@gmail.com>
 
