@@ -4,6 +4,8 @@ import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.selectFirst;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -173,6 +175,28 @@ public class EmojiUtils extends AbstractEmoji {
 		}
 		return counter;
 	}
+	
+	/**
+	 * Parses valid emojis in passed string
+	 * 
+	 * @param text String to parse emoji characters in.
+	 * @return returns list of emojis in DecimalHTML format
+	 */
+	public static List<Emoji> parseEmojis(String text) {
+
+		String htmlifiedText = htmlify(text);
+		// regex to identify html entitities in htmlified text
+		Matcher matcher = htmlEntityPattern.matcher(htmlifiedText);
+
+		List<Emoji> list = new ArrayList<Emoji>();
+		while (matcher.find()) {
+			String emojiCode = matcher.group();
+			if (isEmoji(emojiCode)) {
+				list.add(EmojiManager.getEmoji(emojiCode));
+			}
+		}
+		return list;
+	}	
 
 	/**
 	 * Converts unicode characters in text to corresponding decimal html

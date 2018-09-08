@@ -2,7 +2,9 @@ package emoji4j;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,9 +17,9 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  */
 public class EmojiManager {
 	private static Pattern emoticonRegexPattern;
-	
 	private static List<Emoji> emojiData;
-
+	private static Map<String,Emoji> emojiMap;
+	
 	static {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -25,6 +27,10 @@ public class EmojiManager {
 			emojiData = mapper.readValue(stream, TypeFactory.defaultInstance().constructCollectionType(List.class, Emoji.class));
 			stream.close();
 			processEmoticonsToRegex();
+			emojiMap = new HashMap<String,Emoji>(emojiData.size());
+			for (Emoji e: emojiData) {
+				emojiMap.put(e.getDecimalHtml(), e);
+			}
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
@@ -36,6 +42,23 @@ public class EmojiManager {
 	 */
 	public static List<Emoji> data() {
 		return emojiData;
+	}
+	
+	/**
+	 * Returns the complete emoji data
+	 * @return Map of emoji objects keyed by DecimalHTML format
+	 */
+	public static Map<String,Emoji> map() {
+		return emojiMap;
+	}
+	
+	/**
+	 * Returns a specific Emoji from the data
+	 * @param emojiCode DecimalHTML format
+	 * @return the emoji object or null if not found
+	 */
+	public static Emoji getEmoji(String emojiCode) {
+		return emojiMap.get(emojiCode);
 	}
 	
 	/**
@@ -51,11 +74,10 @@ public class EmojiManager {
 	 * Processes the Emoji data to emoticon regex
 	 */
 	private static void processEmoticonsToRegex() {
-		
 		List<String> emoticons=new ArrayList<String>();
 		
 		for(Emoji e: emojiData) {
-			if(e.getEmoticons()!=null) {
+			if (e.getEmoticons() != null) {
 				emoticons.addAll(e.getEmoticons());
 			}
 		}
@@ -74,7 +96,6 @@ public class EmojiManager {
 				}
 			}
 		}
-		
 		
 		StringBuilder sb=new StringBuilder();
 		for(String emoticon: emoticons) {

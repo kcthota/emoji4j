@@ -15,7 +15,11 @@ public class Emoji extends AbstractEmoji {
 
 	private String emoji;
 
+	private String description;
+
 	private List<String> aliases;
+
+	private List<String> tags;
 
 	private String hexHtml;
 
@@ -26,7 +30,7 @@ public class Emoji extends AbstractEmoji {
 	private String hexHtmlShort;
 	
 	private String decimalSurrogateHtml;
-	
+		
 	private List<String> emoticons;
 
 	/**
@@ -40,7 +44,6 @@ public class Emoji extends AbstractEmoji {
 	public void setEmoji(String emoji) {
 		setDecimalHtml(EmojiUtils.htmlifyHelper(emoji,false, false));
 		setHexHtml(EmojiUtils.htmlifyHelper(emoji,true, false));
-		
 		setDecimalSurrogateHtml(EmojiUtils.htmlifyHelper(emoji,false, true));
 		this.emoji = emoji;
 	}
@@ -95,6 +98,18 @@ public class Emoji extends AbstractEmoji {
 			this.setDecimalHtmlShort(decimalHtml);
 		}
 	}
+	
+	/**
+	 * Gets the description
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	/**
 	 * Gets the list of emoticons associated with the emoji
@@ -135,6 +150,11 @@ public class Emoji extends AbstractEmoji {
 		this.hexHtmlShort = hexHtmlShort;
 	}
 	
-	
-	
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}	
 }
