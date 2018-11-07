@@ -151,7 +151,7 @@ EmojiUtils.htmlify(text, true); //returns &#55357;&#56835;
 
 ```
 
-##shortCodify
+## shortCodify
 
 ```
 String text = "A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.";
