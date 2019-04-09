@@ -29,7 +29,7 @@
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.7.0</jackson.version>
+		<jackson.version>2.8.7</jackson.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
