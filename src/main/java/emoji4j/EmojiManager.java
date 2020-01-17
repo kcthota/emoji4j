@@ -75,15 +75,37 @@ public class EmojiManager {
 			}
 		}
 		
-		
+		emoticonRegexPattern = getAsciiEmojiRegex(emoticons);
+	}
+
+	public static void addStopWords(String... stopwords) {
+		if (stopwords ==null || stopwords.length == 0)
+			return;
+
 		StringBuilder sb=new StringBuilder();
-		for(String emoticon: emoticons) {
+		for(String stopword : stopwords) {
+			sb.append(stopword);
+			sb.append("|");
+		}
+		String emojiRegex = emoticonRegexPattern.toString();
+		sb.append(emojiRegex);
+		emoticonRegexPattern =  Pattern.compile(sb.toString());
+	}
+
+	public static void clearStopWords() {
+		//rebuild the emoji list
+		processEmoticonsToRegex();
+	}
+
+	private static Pattern getAsciiEmojiRegex(List<String> emojiList) {
+		StringBuilder sb=new StringBuilder();
+		for(String emoticon: emojiList) {
 			if(sb.length() !=0) {
 				sb.append("|");
 			}
 			sb.append(Pattern.quote(emoticon));
 		}
-		
-		emoticonRegexPattern = Pattern.compile(sb.toString());
+
+		return Pattern.compile(sb.toString());
 	}
 }

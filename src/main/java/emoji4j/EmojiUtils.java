@@ -1,13 +1,13 @@
 package emoji4j;
 
+import org.hamcrest.Matchers;
+
 import static ch.lambdaj.Lambda.having;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.selectFirst;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.hamcrest.Matchers;
 
 /**
  * Utils to deal with emojis
@@ -91,7 +91,6 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return
 	 */
 	private static String processStringWithRegex(String text, Pattern pattern, int startIndex, boolean recurseEmojify) {
-		//System.out.println(text);
 		Matcher matcher = pattern.matcher(text);
 		StringBuffer sb = new StringBuffer();
 		int resetIndex = 0;

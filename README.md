@@ -183,6 +183,19 @@ String text = "A &#128049;, &#x1f436;,&nbsp;:coyote: and a :mouse: became friend
 EmojiUtils.countEmojis(text); //returns 8
 
 ```
+
+## Stop words support
+
+Add stop words to filter out certain words from emoji conversion 
+
+```
+String text = "http://www.github.com and https://www.google.com are awesome :-).";
+
+EmojiManager.addStopWords("http://", "https://");
+
+EmojiUtils.emojify(userText) //returns http://www.github.com and https://www.google.com are awesome 😃.
+
+```
 <!--
 # Coming up in 3.0
 
