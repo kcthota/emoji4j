@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.kcthota</groupId>
 	<artifactId>emoji4j</artifactId>
-	<version>6.0-SNAPSHOT</version>
+	<version>6.1-SNAPSHOT</version>
 	<name>Emoji4j</name>
 	<url>https://github.com/kcthota/emoji4j</url>
 	<description>Java library to convert short codes, html entities to emojis and vice-versa</description>
