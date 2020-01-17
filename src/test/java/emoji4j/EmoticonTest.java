@@ -27,4 +27,12 @@ public class EmoticonTest {
 		assertThat(EmojiUtils.emojify(text)).isEqualTo(
 				"A 🐱, 🐶 and a 🐭 became friends❤️. For 🐶's birthday party, they all had 🍔s, 🍟s, 🍪s and 🍰.");
 	}
+
+	@Test
+	public void testIssue5() {
+		String text ="a fix for \uD83D\uDE14";
+		assertThat(EmojiUtils.removeAllEmojis(text)).isEqualTo("a fix for ");
+	}
+
+
 }

@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 /**
  * 
- * @author chait
+ * @author Krishna Chaitanya Thota
  *
  */
 public abstract class AbstractEmoji {

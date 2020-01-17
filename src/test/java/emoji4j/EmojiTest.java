@@ -229,4 +229,25 @@ public class EmojiTest {
 
 		assertThat(EmojiUtils.emojify(hexHtmlString)).isEqualTo(emojiText);
 	}
+
+	@Test
+	public void testStopWords() {
+		EmojiManager.addStopWords("http://", "https://");
+
+		String userText = "http://www.github.com and https://www.google.com are awesome :-).";
+
+		assertThat(EmojiUtils.emojify(userText)).isEqualTo("http://www.github.com and https://www.google.com are awesome 😃.");
+
+	}
+
+
+	@Test
+	public void testClearStopWords() {
+		EmojiManager.addStopWords("http://", "https://");
+		EmojiManager.clearStopWords();
+		String userText = "http://www.github.com and https://www.google.com are awesome :-).";
+
+		assertThat(EmojiUtils.emojify(userText)).isEqualTo("http\uD83D\uDE15/www.github.com and https\uD83D\uDE15/www.google.com are awesome \uD83D\uDE03.");
+
+	}
 }
