@@ -15,8 +15,8 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: kcthota@gmail.com
     build_command_prepend: "mvn clean"
-    build_command:   "mvn -s src/test/resources/settings.xml -DskipTests=true compile"
+    build_command:   "mvn -DskipTests=true compile"
     branch_pattern: coverity
 
 after_success:
- - mvn -s src/test/resources/settings.xml clean cobertura:cobertura coveralls:report
+ - mvn clean cobertura:cobertura coveralls:report
