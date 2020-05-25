@@ -19743,6 +19743,7 @@
 , "category": "Flags"
 , "aliases": [
     "de"
+,   "germany"
   ]
 , "tags": [
     "flag"
@@ -19901,6 +19902,7 @@
 , "category": "Flags"
 , "aliases": [
     "es"
+,   "spain"
   ]
 , "tags": [
     "spain"
@@ -19999,6 +20001,7 @@
 , "category": "Flags"
 , "aliases": [
     "fr"
+,   "france"
   ]
 , "tags": [
     "france"
@@ -20026,6 +20029,7 @@
 , "aliases": [
     "gb"
   , "uk"
+  , "united_kingdom"
   ]
 , "tags": [
     "flag"
@@ -20436,6 +20440,7 @@
 , "category": "Flags"
 , "aliases": [
     "it"
+,   "italy"
   ]
 , "tags": [
     "italy"
@@ -20485,6 +20490,7 @@
 , "category": "Flags"
 , "aliases": [
     "jp"
+,   "japan"
   ]
 , "tags": [
     "japan"
@@ -20582,6 +20588,7 @@
 , "category": "Flags"
 , "aliases": [
     "kr"
+,   "south_korea"
   ]
 , "tags": [
     "korea"
@@ -20847,6 +20854,7 @@
 , "category": "Flags"
 , "aliases": [
     "macedonia"
+,   "north_macedonia"
   ]
 , "tags": [
   ]
@@ -20871,6 +20879,7 @@
 , "category": "Flags"
 , "aliases": [
     "myanmar"
+,   "burma"
   ]
 , "tags": [
     "burma"
@@ -20896,6 +20905,7 @@
 , "category": "Flags"
 , "aliases": [
     "macau"
+,   "macao"
   ]
 , "tags": [
   ]
@@ -21833,6 +21843,7 @@
 , "category": "Flags"
 , "aliases": [
     "tr"
+,   "turkey"
   ]
 , "tags": [
     "turkey"
@@ -21942,6 +21953,8 @@
 , "category": "Flags"
 , "aliases": [
     "us"
+,   "usa"
+,   "united_states"
   ]
 , "tags": [
     "flag"
