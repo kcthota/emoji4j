@@ -162,6 +162,15 @@ public class EmojiTest {
 	}
 
 	@Test
+	public void shouldIgnoreEmoticonsIfSpecified() {
+		String text = "Payment 123 (Tax) 🤑";
+		String actual = EmojiUtils.shortCodify(text, true);
+
+		assertThat(actual)
+				.isEqualTo("Payment 123 (Tax) :money_mouth_face:");
+	}
+
+	@Test
 	public void testShortCodifyFromHtmlEntities() {
 		String text = "A &#128049;, &#128054; and a &#128045; became friends. For &#128054;'s birthday party, they all had &#127828;s, &#127839;s, &#127850;s and &#127856;.";
 		assertThat(EmojiUtils.shortCodify(text))

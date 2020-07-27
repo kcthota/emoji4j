@@ -57,7 +57,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return is emoji
 	 */
 	public static boolean isEmoji(String code) {
-		return getEmoji(code) == null ? false : true;
+		return getEmoji(code) != null;
 	}
 
 	/**
@@ -67,18 +67,25 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return emojified String
 	 */
 	public static String emojify(String text) {
-		return emojify(text, 0);
+		return emojify(text, 0, false);
 		
 	}
+
+	public static String emojify(String text, boolean ignoreEmoticon) {
+		return emojify(text, 0, ignoreEmoticon);
+
+	}
 	
-	private static String emojify(String text, int startIndex) {
+	private static String emojify(String text, int startIndex, boolean ignoreEmoticon) {
 		text = processStringWithRegex(text, shortCodeOrHtmlEntityPattern, startIndex, true);
 		
 		// emotions should be processed in second go.
 		// this will avoid conflicts with shortcodes. For Example: :p:p should
 		// not
 		// be processed as shortcode, but as emoticon
-		text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern(), startIndex, true);
+		if (!ignoreEmoticon) {
+			text = processStringWithRegex(text, EmojiManager.getEmoticonRegexPattern(), startIndex, true);
+		}
 
 		return text;
 	}
@@ -146,7 +153,7 @@ public class EmojiUtils extends AbstractEmoji {
 		//do not recurse emojify when coming here through htmlSurrogateEntityPattern2..so we get a chance to check if the tail
 		//is part of a surrogate entity
 		if(recurseEmojify && resetIndex > 0) {
-			return emojify(sb.toString(), resetIndex);
+			return emojify(sb.toString(), resetIndex, false);
 		}
 		return sb.toString();
 	}
@@ -211,7 +218,11 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return shortcodified string
 	 */
 	public static String shortCodify(String text) {
-		String emojifiedText = emojify(text);
+		return shortCodify(text, false);
+	}
+
+	public static String shortCodify(String text, boolean ignoreEmoticon) {
+		String emojifiedText = emojify(text, ignoreEmoticon);
 
 		// TODO - this approach is ugly, need to find an optimal way to replace
 		// the emojis
