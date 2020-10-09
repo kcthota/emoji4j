@@ -30,6 +30,21 @@ public class Emoji extends AbstractEmoji {
 	private List<String> emoticons;
 
 	/**
+	 * does emoji have skin-tone variants
+	 */
+	private boolean skin_tones;
+
+	/**
+	 * min IOS compatibility version
+	 */
+	private String ios_version;
+
+	/**
+	 * emoji unicode version
+	 */
+	private String unicode_version;
+
+	/**
 	 * Gets the unicode emoji character
 	 * @return Emoji String
 	 */
@@ -134,7 +149,31 @@ public class Emoji extends AbstractEmoji {
 	public void setHexHtmlShort(String hexHtmlShort) {
 		this.hexHtmlShort = hexHtmlShort;
 	}
-	
-	
-	
+
+	/**
+	 * does emoji have skin-tone variants
+	 * @return
+	 */
+	public boolean hasSkinTones()
+	{
+		return skin_tones;
+	}
+
+	/**
+	 * get min IOS compatible version
+	 * @return
+	 */
+	public String getIOSVersion()
+	{
+		return ios_version;
+	}
+
+	/**
+	 * get min unicode version
+	 * @return
+	 */
+	public String getUnicodeVersion()
+	{
+		return unicode_version;
+	}
 }
