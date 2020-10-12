@@ -11971,7 +11971,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "de" ],
+  "aliases" : [ "de", "germany" ],
   "tags" : [ "flag", "germany" ]
 }, {
   "emoji" : "🇩🇬",
@@ -12063,7 +12063,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "es" ],
+  "aliases" : [ "es", "spain" ],
   "tags" : [ "spain" ]
 }, {
   "emoji" : "🇪🇹",
@@ -12120,7 +12120,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "fr" ],
+  "aliases" : [ "fr", "france" ],
   "tags" : [ "france", "french" ]
 }, {
   "emoji" : "🇬🇦",
@@ -12135,7 +12135,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "gb", "uk" ],
+  "aliases" : [ "gb", "uk", "united_kingdom" ],
   "tags" : [ "flag", "british" ]
 }, {
   "emoji" : "🇬🇩",
@@ -12353,29 +12353,29 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "iraq" ]
+  "aliases" : [ "flags", "iraq" ]
 }, {
   "emoji" : "🇮🇷",
   "description" : "flag: Iran",
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "iran" ]
+  "aliases" : [ "flags", "iran" ]
 }, {
   "emoji" : "🇮🇸",
   "description" : "flag: Iceland",
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "iceland" ]
+  "aliases" : [ "flags", "iceland" ]
 }, {
   "emoji" : "🇮🇹",
   "description" : "flag: Italy",
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "it" ],
-  "tags" : [ "italy" ]
+  "aliases" : [ "it", "italy" ],
+  "tags" : [ "flags", "italy" ]
 }, {
   "emoji" : "🇯🇪",
   "description" : "flag: Jersey",
@@ -12403,7 +12403,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "jp" ],
+  "aliases" : [ "jp", "japan" ],
   "tags" : [ "japan" ]
 }, {
   "emoji" : "🇰🇪",
@@ -12460,7 +12460,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "kr" ],
+  "aliases" : [ "kr", "korea" ],
   "tags" : [ "korea" ]
 }, {
   "emoji" : "🇰🇼",
@@ -12615,7 +12615,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "macedonia" ]
+  "aliases" : [ "macedonia", "north_macedonia" ]
 }, {
   "emoji" : "🇲🇱",
   "description" : "flag: Mali",
@@ -12629,7 +12629,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "myanmar" ],
+  "aliases" : [ "myanmar", "burma" ],
   "tags" : [ "burma" ]
 }, {
   "emoji" : "🇲🇳",
@@ -12644,7 +12644,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "8.3",
-  "aliases" : [ "macau" ]
+  "aliases" : [ "macau", "macao" ]
 }, {
   "emoji" : "🇲🇵",
   "description" : "flag: Northern Mariana Islands",
@@ -13191,7 +13191,7 @@
   "category" : "Flags",
   "unicode_version" : "8.0",
   "ios_version" : "9.1",
-  "aliases" : [ "tr" ],
+  "aliases" : [ "tr", "turkey" ],
   "tags" : [ "turkey" ]
 }, {
   "emoji" : "🇹🇹",
@@ -13255,7 +13255,7 @@
   "category" : "Flags",
   "unicode_version" : "6.0",
   "ios_version" : "6.0",
-  "aliases" : [ "us" ],
+  "aliases" : [ "us","usa", "united_states" ],
   "tags" : [ "flag", "united", "america" ]
 }, {
   "emoji" : "🇺🇾",
