@@ -73,6 +73,12 @@ emoji.getHexHtml(); //return &#x1f42d;
 
 emoji.getAliases(); //returns a collection of aliases. ["mouse"]
 
+emoji.getIOSVersion(); // returns minimum compatible IOS version (string)
+
+emoji.getUnicodeVersion(); // returns minimum compatible Emoji unicode version (string)
+
+emoji.hasSkinTones(); // returns boolean indicating whether emoji has skin-tone variants, or not
+
 ```
 
 ## isEmoji
@@ -197,9 +203,6 @@ EmojiManager.addStopWords("http://", "https://");
 EmojiUtils.emojify(userText) //returns http://www.github.com and https://www.google.com are awesome 😃.
 
 ```
-<!--
-# Coming up in 3.0
-
 -->
 
 ## License:
