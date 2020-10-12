@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
 
+import java.util.List;
+
 public class EmojiTest {
 
 	@Test
@@ -249,5 +251,37 @@ public class EmojiTest {
 
 		assertThat(EmojiUtils.emojify(userText)).isEqualTo("http\uD83D\uDE15/www.github.com and https\uD83D\uDE15/www.google.com are awesome \uD83D\uDE03.");
 
+	}
+
+	@Test
+	public void testNoSkinTones() {
+		// existing emoji
+		Emoji emoji = EmojiUtils.getEmoji("😃");
+		assertThat(emoji).isNotNull();
+		assertThat(emoji.hasSkinTones()).isFalse();
+	}
+
+	@Test
+	public void testSkinTones() {
+		// existing emoji
+		Emoji emoji = EmojiUtils.getEmoji("👍");
+		assertThat(emoji).isNotNull();
+		assertThat(emoji.hasSkinTones()).isTrue();
+	}
+
+	@Test
+	public void testIOSVersion() {
+		// existing emoji
+		Emoji emoji = EmojiUtils.getEmoji("🕌");
+		assertThat(emoji).isNotNull();
+		assertThat(emoji.getIOSVersion()).isEqualTo("9.1");
+	}
+
+	@Test
+	public void testUnicodeVersion() {
+		// existing emoji
+		Emoji emoji = EmojiUtils.getEmoji("🛕");
+		assertThat(emoji).isNotNull();
+		assertThat(emoji.getUnicodeVersion()).isEqualTo("12.0");
 	}
 }

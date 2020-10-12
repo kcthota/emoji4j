@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Emoji
@@ -32,16 +33,19 @@ public class Emoji extends AbstractEmoji {
 	/**
 	 * does emoji have skin-tone variants
 	 */
-	private boolean skin_tones;
+	@JsonProperty
+	private boolean skin_tones = false;
 
 	/**
 	 * min IOS compatibility version
 	 */
+	@JsonProperty
 	private String ios_version;
 
 	/**
 	 * emoji unicode version
 	 */
+	@JsonProperty
 	private String unicode_version;
 
 	/**
@@ -175,5 +179,11 @@ public class Emoji extends AbstractEmoji {
 	public String getUnicodeVersion()
 	{
 		return unicode_version;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("[Emoji] emoji {%s} skin_tones {%s} hex {%s} ios {%s} unicode {%s}", emoji, hasSkinTones(), getHexHtml(), getIOSVersion(), getUnicodeVersion());
 	}
 }
