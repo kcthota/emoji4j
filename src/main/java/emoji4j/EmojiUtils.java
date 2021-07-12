@@ -61,7 +61,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return is emoji
 	 */
 	public static boolean isEmoji(String code) {
-		return getEmoji(code) == null ? false : true;
+		return getEmoji(code) != null;
 	}
 
 	/**
