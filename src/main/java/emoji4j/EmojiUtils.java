@@ -1,13 +1,10 @@
 package emoji4j;
 
-import org.hamcrest.Matchers;
-
-import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.on;
-import static ch.lambdaj.Lambda.selectFirst;
-
+import java.util.Collection;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Utils to deal with emojis
@@ -34,19 +31,26 @@ public class EmojiUtils extends AbstractEmoji {
 		if (m.find()) {
 			code = m.group(1);
 		}
-		
-		Emoji emoji = selectFirst(
-				EmojiManager.data(),
-				having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)).or(having(on(Emoji.class).getEmoji(), Matchers.equalTo(code)))
-						.or(having(on(Emoji.class).getHexHtml(), Matchers.equalToIgnoringCase(code)))
-						.or(having(on(Emoji.class).getDecimalHtml(), Matchers.equalToIgnoringCase(code)))
-						.or(having(on(Emoji.class).getDecimalSurrogateHtml(), Matchers.equalToIgnoringCase(code)))
-						.or(having(on(Emoji.class).getHexHtmlShort(), Matchers.equalToIgnoringCase(code)))
-						.or(having(on(Emoji.class).getDecimalHtmlShort(), Matchers.equalToIgnoringCase(code)))
-						.or(having(on(Emoji.class).getAliases(), Matchers.hasItem(code)))
-						.or(having(on(Emoji.class).getEmoticons(), Matchers.hasItem(code))));
 
-		return emoji;
+		String emojiCode = code;
+
+		return EmojiManager.data().stream()
+				.filter(e -> e.getEmoji().equals(emojiCode) ||
+							 e.getHexHtml().equalsIgnoreCase(emojiCode) ||
+							 e.getDecimalHtml().equalsIgnoreCase(emojiCode) ||
+							 e.getDecimalSurrogateHtml().equalsIgnoreCase(emojiCode) ||
+							 e.getHexHtmlShort().equalsIgnoreCase(emojiCode) ||
+							 e.getDecimalHtmlShort().equalsIgnoreCase(emojiCode) ||
+							 collectionToStream(e.getAliases()).anyMatch(alias -> alias.equalsIgnoreCase(emojiCode)) ||
+							 collectionToStream(e.getEmoticons()).anyMatch(emoticon -> emoticon.equalsIgnoreCase(emojiCode)))
+				.findFirst()
+				.orElse(null);
+	}
+
+	private static Stream<String> collectionToStream(Collection<String> collection) {
+		return Optional.ofNullable(collection)
+				.map(Collection::stream)
+				.orElseGet(Stream::empty);
 	}
 
 	/**
@@ -57,7 +61,7 @@ public class EmojiUtils extends AbstractEmoji {
 	 * @return is emoji
 	 */
 	public static boolean isEmoji(String code) {
-		return getEmoji(code) == null ? false : true;
+		return getEmoji(code) != null;
 	}
 
 	/**
