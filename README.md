@@ -1,12 +1,15 @@
 emoji4j
 =============
 
+
 [![Build Status](https://img.shields.io/travis/kcthota/emoji4j/master.svg)](https://travis-ci.org/kcthota/emoji4j)
 [![Coverage Status](https://img.shields.io/coveralls/kcthota/emoji4j/master.svg)](https://coveralls.io/r/kcthota/emoji4j?branch=master)
 [![Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://img.shields.io/badge/Maven-Central-blue.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/emoji4j)
 [![Java Doc](https://img.shields.io/badge/JavaDoc-5.0-brightgreen.svg)](https://www.javadoc.io/doc/com.kcthota/emoji4j)
 
+
+[WARNING]: This project is not actively being maintainted. You may use [vdurmont/emoji-java](https://github.com/vdurmont/emoji-java) as an alternative.
 
 Java library to convert short codes, html entities to emojis and vice-versa. Also supports parsing emoticons, surrogate html entities.
 
