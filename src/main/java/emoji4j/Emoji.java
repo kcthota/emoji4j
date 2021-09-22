@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Emoji
@@ -28,6 +29,24 @@ public class Emoji extends AbstractEmoji {
 	private String decimalSurrogateHtml;
 	
 	private List<String> emoticons;
+
+	/**
+	 * does emoji have skin-tone variants
+	 */
+	@JsonProperty
+	private boolean skin_tones = false;
+
+	/**
+	 * min IOS compatibility version
+	 */
+	@JsonProperty
+	private String ios_version;
+
+	/**
+	 * emoji unicode version
+	 */
+	@JsonProperty
+	private String unicode_version;
 
 	/**
 	 * Gets the unicode emoji character
@@ -134,7 +153,37 @@ public class Emoji extends AbstractEmoji {
 	public void setHexHtmlShort(String hexHtmlShort) {
 		this.hexHtmlShort = hexHtmlShort;
 	}
-	
-	
-	
+
+	/**
+	 * does emoji have skin-tone variants
+	 * @return
+	 */
+	public boolean hasSkinTones()
+	{
+		return skin_tones;
+	}
+
+	/**
+	 * get min IOS compatible version
+	 * @return
+	 */
+	public String getIOSVersion()
+	{
+		return ios_version;
+	}
+
+	/**
+	 * get min unicode version
+	 * @return
+	 */
+	public String getUnicodeVersion()
+	{
+		return unicode_version;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("[Emoji] emoji {%s} skin_tones {%s} hex {%s} ios {%s} unicode {%s}", emoji, hasSkinTones(), getHexHtml(), getIOSVersion(), getUnicodeVersion());
+	}
 }
